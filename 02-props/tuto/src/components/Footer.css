@@ -1,0 +1,9 @@
+.footer {
+  color: white;
+  background-color: deepskyblue;
+  padding: 0 10px;
+  flex-shrink: 0;
+  border-top: solid 2px white;
+  /* padding: 10px 0;
+  width: 100% */
+}

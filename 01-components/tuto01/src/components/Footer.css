@@ -1,0 +1,6 @@
+.footer {
+  background-color: aqua;
+  flex-shrink: 0;
+  /* padding: 10px 0;
+  width: 100% */
+}

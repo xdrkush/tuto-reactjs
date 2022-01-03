@@ -1,0 +1,37 @@
+.countries .sort-container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  padding: 8px;
+  border-radius: 15px;
+  background-color: lightgreen;
+  color: white;
+  box-shadow: 0 2px 2px rgba(51, 51, 51, 0.3);
+}
+.countries .sort-container ul {
+  display: flex;
+  justify-content: space-around;
+}
+.countries .sort-container ul input[type="radio"] {
+  transform: translate(-5px, 1px);
+}
+.countries .cancel {
+  margin: 20px auto 30px;
+  width: 100%;
+}
+.countries .cancel h5 {
+  border: 1px darkslateblue;
+  text-align: center;
+  width: 180px;
+  margin: 0 auto;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.countries .cancel h5:hover {
+  background: lightgreen;
+  border-color: darkslateblue;
+}
+.countries .countries-list {
+  display: flex;
+  flex-wrap: wrap;
+}

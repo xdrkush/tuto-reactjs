@@ -1,0 +1,20 @@
+.navigation {
+  display: flex;
+  background-color: blue;
+  padding: 0 10px
+}
+.navigation a {
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+}
+.navigation .nav-active::after {
+  content: "";
+  width: 85%;
+  height: 5px;
+  background: blue;
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+}
