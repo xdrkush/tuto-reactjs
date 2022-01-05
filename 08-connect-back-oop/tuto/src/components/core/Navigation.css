@@ -1,0 +1,30 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  background-color: deepskyblue;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  /* padding: 0 10px; */
+  color: white;
+  border-bottom: solid 2px white;
+}
+
+.navigation a {
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  color: white;
+  text-decoration: none;
+}
+
+.navigation .nav-active::after {
+  content: "";
+  width: 85%;
+  height: 5px;
+  background: deepskyblue;
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+}

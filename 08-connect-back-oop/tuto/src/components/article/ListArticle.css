@@ -1,0 +1,38 @@
+.listCard {text-align: center;}
+
+.listCard h2 {
+  color: deepskyblue;
+  text-shadow: -1px 1px white;
+  margin: 0;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  color: white;
+  background-color: deepskyblue;
+  border-top: solid 2px white;
+  border-left: solid 2px white;
+  box-shadow: 5px 5px 5px rgba(0,0,0, 0.2);
+  width: 20%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px 25px 10px 25px;
+}
+
+/* @media screen and (max-width: 1240px) {
+    .card { width: 33.33%; }
+} */
+
+.card > img {
+  border-top: solid 2px white;
+  border-bottom: solid 2px white;
+  width: 100%;
+  border-radius: 10px 25px 10px 25px;
+}
+
+.card-body {
+  padding: 5px;
+}

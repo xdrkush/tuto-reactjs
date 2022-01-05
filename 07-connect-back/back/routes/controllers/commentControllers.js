@@ -37,8 +37,8 @@ exports.create = async (req, res) => {
       },
       (err, data) => {
         if (err) throw err;
-        res.json({ message: "comment cree avec success !", data: comment });
+        return res.json({ message: "comment cree avec success !", data: comment });
       }
     );
-  } else res.json({ message: "Error, l'comment n'as pas été créé !" });
+  } else return res.json({ message: "Error, l'comment n'as pas été créé !" });
 };

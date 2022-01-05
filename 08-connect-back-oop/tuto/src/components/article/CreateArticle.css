@@ -1,0 +1,28 @@
+.form-container {
+  border: 1px solid white;
+  margin: 20px 0 10px;
+  width: 50%;
+  max-width: 500px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.form-container form input,
+textarea {
+  border: 1px solid white;
+  font-family: "Amiri", serif;
+  padding: 5px 10px;
+  resize: none;
+}
+
+.form-container form input[type="text"],
+.form-container form textarea {
+  margin-bottom: 6px;
+}
+.form-container form textarea {
+  height: 80px;
+}

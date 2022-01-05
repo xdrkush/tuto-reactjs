@@ -100,5 +100,5 @@ exports.deleteAll = async (req, res) => {
 
   //   await Article.deleteMany();
 
-  res.json({ message: "Tout les items on été supprimer avec success !" });
+  res.json({ flash: "Tout les items on été supprimer avec success !" });
 };
