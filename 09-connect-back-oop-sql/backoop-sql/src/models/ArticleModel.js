@@ -18,6 +18,8 @@ Article.getAll = function (result) {
     conn.query(`SELECT * FROM articles`, (error, data) => {
       if (error) throw error;
       result(null, data);
+      // Mettre fin à la connexion avec la db
+      conn.release();
     });
   });
 };
@@ -31,6 +33,7 @@ Article.getById = function (id, result) {
     `, (error, data) => {
       if (error) throw error;
       result(null, data);
+      conn.release();
     });
   });
 };
@@ -46,6 +49,7 @@ Article.create = function (newArticle, result) {
         conn.query(`SELECT * FROM articles`, (error, data) => {
           if (error) throw error;
           result(null, data);
+          conn.release();
         });
       }
     );
@@ -66,6 +70,7 @@ Article.editOne = function (articleObj, result) {
         conn.query(`SELECT * FROM articles`, (error, data) => {
           if (error) throw error;
           result(null, data);
+          conn.release();
         });
       }
     );
@@ -80,6 +85,7 @@ Article.deleteOne = function (id, result) {
       conn.query(`SELECT * FROM articles`, (error, data) => {
         if (error) throw error;
         result(null, data);
+        conn.release();
       });
     });
   });
