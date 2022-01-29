@@ -61,7 +61,7 @@ const Navigation = (props) => {
             <NavLink
               key={link}
               exact="true"
-              to={"/Profile/" + user.name}
+              to={{pathname: "/Profile/" + user.name, state: user}}
               activeclassname="active"
             >
               {link} : {user.name}
