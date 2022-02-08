@@ -11,9 +11,12 @@ const ACategory = () => {
   const title = "category";
   const category = useSelector(state => state.category.listCategory)
   const data = { name: "name", icon: "<icon>" };
+  
   useEffect(() => {
     dispatch(getCategory())
   }, [])
+
+  console.log('category', category)
   return (
     <Grid container columns={16}>
       <Grid item xs={16}>
@@ -23,7 +26,7 @@ const ACategory = () => {
         <Create data={data} str={title} />
       </Grid>
       <Grid item xs={16}>
-        <TableCategory data={category} title={title} />
+        <TableCategory data={category} str={title} />
       </Grid>
     </Grid>
   );

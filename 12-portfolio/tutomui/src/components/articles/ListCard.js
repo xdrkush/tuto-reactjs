@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 const ListCard = (props) => {
   const { list, search } = props;
   const S_title = (item) =>
-    item.name.toLowerCase().includes(search.toLowerCase());
+    item.title.toLowerCase().includes(search.toLowerCase());
   const filterList = list.filter((item) => S_title(item))
 
   return (

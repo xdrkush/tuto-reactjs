@@ -1,4 +1,4 @@
-import HeaderHome from "../components/website/HeaderHome";
+import HeaderHome from "../components/home/HeaderHome";
 import { Box } from "@mui/system";
 
 const HomePage = () => {

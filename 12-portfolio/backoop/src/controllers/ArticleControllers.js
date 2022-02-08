@@ -13,7 +13,12 @@ class ArticleControllers extends Connection {
 
   async getAll(req, res) {
     try {
-      const dbArticles = await Article.find({}, ['title', 'subtitle', 'description', 'author_id']);
+      const dbArticles = await Article.find({}, [
+        "title",
+        "subtitle",
+        "description",
+        "author_id",
+      ]);
       return res.send({
         method: req.method,
         status: "success",
@@ -39,8 +44,8 @@ class ArticleControllers extends Connection {
       const { title, description, subtitle, author_id, category_id } = req.body;
       console.log("req.body", req.body);
       if (title && description) {
-        const category = await Category.findOne({name: category_id})
-        console.log('category', category)
+        const category = await Category.findOne({ name: category_id });
+        console.log("category", category);
         // On définit la construction de notre article
         const article = new Article({
           title,
@@ -50,8 +55,15 @@ class ArticleControllers extends Connection {
           category_id: category._id,
         });
 
+        category.articles_id.push(article._id)
+
         // Et on sauvegarde nos modifications
         article.save((err) => {
+          if (err) return handleError(err);
+        });
+
+        // Et on sauvegarde nos modifications
+        category.save((err) => {
           if (err) return handleError(err);
         });
 
@@ -90,34 +102,14 @@ class ArticleControllers extends Connection {
       const ArticleId = await Article.findById(req.params.id);
       console.log("ArticleId DeleteOne", ArticleId);
 
-      if (ArticleId.comment.length > 0) {
-        for (let i = 0; i < ArticleId.comment.length; i++) {
-          console.log(
-            "Le commentaire de " +
-              ArticleId.comment[i].author +
-              " à bien été supprimer !"
-          );
-          await Comment.findByIdAndDelete(ArticleId.comment[i]._id);
-        }
-
-        Article.findByIdAndDelete(req.params.id, async (err, data) => {
-          if (err) throw err;
-          return res.json({
-            message:
-              "les comments à été supprimer avec success et l'article aussi !",
-            dbArticles: await Article.find(),
-          });
+      Article.findByIdAndDelete(req.params.id, async (err, data) => {
+        if (err) throw err;
+        return res.json({
+          message: "Item delete avec success !",
+          dbArticles: await Article.find(),
         });
-      } else {
-        Article.findByIdAndDelete(req.params.id, async (err, data) => {
-          if (err) throw err;
-          return res.json({
-            message: "Item delete avec success !",
-            dbArticles: await Article.find(),
-          });
-        });
-      }
-    } catch {
+      });
+    } catch (error) {
       throw error;
     }
   }

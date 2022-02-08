@@ -12,8 +12,15 @@ class CategoryControllers extends Connection {
 
   async getAll(req, res) {
     try {
-      const dbCategory = await Category.find({}, ['name', 'icon', 'articles_id']).populate('articles_id');
-      console.log('fefezf')
+      const dbCategory = await Category
+          .find({}, [
+            "name",
+            "icon",
+            "articles_id",
+          ])
+          .populate("articles_id");
+
+      console.log("fefezf");
       return res.send({
         method: req.method,
         status: "success",
@@ -52,7 +59,7 @@ class CategoryControllers extends Connection {
 
         return res.json({
           message: "Item cree avec success !",
-          dbCategory: await Category.find({}, ['name', 'icon', 'articles_id']),
+          dbCategory: await Category.find({}, ["name", "icon", "articles_id"]),
         });
       } else return res.json({ message: "Error, l'item n'as pas été créé !" });
     } catch {
@@ -61,31 +68,35 @@ class CategoryControllers extends Connection {
   }
 
   async editOne(req, res) {
-    const article = await Category.findById(req.params.id)
-    let articlesTemp = []
+    const article = await Category.findById(req.params.id);
+    let articlesTemp = [];
     // if (req.body.articles_id !== Array) req.body.articles_id = [req.body.articles_id]
 
-    console.log("article", article)
-    if (article.articles_id.length !== req.body.articles_id) {
-      articlesTemp = []
-      req.body.articles_id.forEach(art => articlesTemp.push(art))
-    } else {
-      articlesTemp = article.articles_id
-    }
-    
-    console.log("articlesTemp", articlesTemp)
+    console.log("article", article, req.body, article.articles_id.length);
+    articlesTemp.push(req.body.articles_id);
+    // if (article.articles_id.length !== req.body.articles_id) {
+    //   articlesTemp = []
+    //   req.body.articles_id.forEach(art => articlesTemp.push(art))
+    // } else {
+    //   articlesTemp = article.articles_id
+    // }
+
+    console.log("articlesTemp", articlesTemp);
 
     try {
       console.log("put", req.params, req.body);
       Category.findByIdAndUpdate(
         req.params.id,
-        { ...req.body,
-        articles_id: articlesTemp },
+        { ...req.body, articles_id: articlesTemp },
         async (err, data) => {
           if (err) throw err;
           return res.json({
             message: "Item edit avec success !",
-            dbCategory: await Category.find({}, ['name', 'icon', 'articles_id']),
+            dbCategory: await Category.find({}, [
+              "name",
+              "icon",
+              "articles_id",
+            ]),
           });
         }
       );
@@ -96,19 +107,18 @@ class CategoryControllers extends Connection {
 
   async deleteOne(req, res) {
     try {
-      console.log("delete", req.query, req.params.id);
+      console.log("delete", req.params.id);
       const CategoryId = await Category.findById(req.params.id);
       console.log("CategoryId DeleteOne", CategoryId);
 
       Category.findByIdAndDelete(req.params.id, async (err, data) => {
         if (err) throw err;
         return res.json({
-          message:
-            "la category à été supprimer avec success !",
-            dbCategory: await Category.find(),
+          message: "la category à été supprimer avec success !",
+          dbCategory: await Category.find(),
         });
       });
-    } catch {
+    } catch (error) {
       throw error;
     }
   }
@@ -126,7 +136,7 @@ class CategoryControllers extends Connection {
         console.log("db", i);
       });
 
-      //   await Category.deleteMany();
+      await Category.deleteMany();
 
       return res.json({
         message: "Tout les items on été supprimer avec success !",

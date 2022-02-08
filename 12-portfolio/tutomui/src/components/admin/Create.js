@@ -56,8 +56,7 @@ export default function CreateModule(props) {
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
       {Object.entries(data).map((arr, index) => {
-        const key = arr[0],
-          value = arr[1];
+        const key = arr[0]
         if (key === "id") return;
         if (key === "author_id") return;
         if (key === "category_id") {

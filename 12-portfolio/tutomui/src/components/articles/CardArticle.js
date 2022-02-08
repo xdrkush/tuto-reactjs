@@ -43,68 +43,23 @@ const CardArticle = (props) => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-      console.log("Form:", { id: item.id, });
-      await dispatch(editArticle({ id: item.id, }));
+      console.log("Form:", { id: item._id, });
+      await dispatch(editArticle({ id: item._id, }));
       await dispatch(getArticles());
   };
 
   return (
-    <Card key={item.id} sx={{ maxWidth: 345, minWidth: 275 }}>
+    <Card key={item._id} sx={{ maxWidth: 345, minWidth: 275 }}>
       <CardActionArea>
-        <CardContent>
+        <CardContent onClick={e => navigate("/Article/" + item.title.name, { state: { article: item } })}>
           <Typography gutterBottom variant="h5" component="div">
-            {item.name}
+            {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {item.description}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button
-          onClick={() => handleDelete(item.id)}
-          size="small"
-          color="primary"
-        >
-          Delete
-        </Button>
-        <Button onClick={() => toArticleID(item)} size="small" color="primary">
-          View more
-        </Button>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent sx={{ mx: { md: 2, sm: 0 } }}>
-          <TextField
-            style={{ minWidth: "70%" }}
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Title article"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            style={{ minWidth: "70%" }}
-            autoFocus
-            margin="dense"
-            id="price"
-            label="Price article"
-            type="number"
-            fullWidth
-            variant="standard"
-          />
-          <Button onClick={handleForm}>Submit</Button>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 };

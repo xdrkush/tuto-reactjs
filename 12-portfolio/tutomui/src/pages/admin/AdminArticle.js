@@ -30,7 +30,7 @@ const AArticle = () => {
         <Create data={article} str={title} />
       </Grid>
       <Grid item xs={16}>
-        <TableArticle data={articles} title={title} />
+        <TableArticle data={articles} str={title} />
       </Grid>
     </Grid>
   );

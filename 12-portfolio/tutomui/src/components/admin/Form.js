@@ -32,8 +32,7 @@ export default function FormModule(props) {
       }}
     >
       {Object.entries(data).map((arr, index) => {
-        const key = arr[0],
-          value = arr[1];
+        const key = arr[0]
         if (key === "id" || key === "_id" || key === "__v") return;
         if (key === "category_id") {
           return (

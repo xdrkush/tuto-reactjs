@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,8 +15,11 @@ const ArticleIDPage = () => {
 
   return (
     <Box>
-      <h2>ArticleIDPage</h2>
-      <p> Name: {state && state.article.title} </p>
+      <Typography variant="h2">{state && state.article.title}</Typography>
+      <Typography variant="h3">{state && state.article.subtitle}</Typography>
+      <Typography variant="body">
+        {state && state.article.description}
+      </Typography>
     </Box>
   );
 };

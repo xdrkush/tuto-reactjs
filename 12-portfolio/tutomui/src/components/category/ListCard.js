@@ -20,10 +20,10 @@ const ListCard = (props) => {
           flexWrap: "wrap",
         }}
       >
-        {filterList.map((item, index) => {
+        {filterList.map((category, index) => {
           return (
             <Box key={index} sx={{ p: 1 }}>
-              <CardArticle key={index} item={item} />
+              <CardArticle key={index} data={category} />
             </Box>
           );
         })}

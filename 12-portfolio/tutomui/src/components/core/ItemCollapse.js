@@ -32,7 +32,7 @@ const ItemCollapse = (props) => {
         <List component="div" disablePadding>
           {category.articles_id.map((art, index) => {
             return (
-              <ListItemButton key={index} sx={{ pl: 4 }} onClick={() => navigate(`/Article/${art.name}`, { state: { article: art }})}>
+              <ListItemButton key={index} sx={{ pl: 4 }} onClick={() => navigate(`/Article/${art.title}`, { state: { article: art }})}>
                 <ListItemText secondary={art.title} />
               </ListItemButton>
             );
