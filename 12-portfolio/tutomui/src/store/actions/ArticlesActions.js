@@ -63,7 +63,7 @@ export const deleteArticle = (id) => {
 // Edit Article
 export const editArticle = (data) => {
   return (dispatch) => {
-    return axios.put(`/article/${ data.id }`, data)
+    return axios.put(`/article/${ data._id }`, data)
       .then((res) => {
         dispatch({ type: EDIT_ARTICLE, payload: res.data})
       })

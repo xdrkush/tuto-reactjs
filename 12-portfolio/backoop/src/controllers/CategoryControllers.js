@@ -68,12 +68,12 @@ class CategoryControllers extends Connection {
   }
 
   async editOne(req, res) {
+    console.log("Category", req.params, req.body);
     const article = await Category.findById(req.params.id);
-    let articlesTemp = [];
+    // let articlesTemp = [];
     // if (req.body.articles_id !== Array) req.body.articles_id = [req.body.articles_id]
 
-    console.log("article", article, req.body, article.articles_id.length);
-    articlesTemp.push(req.body.articles_id);
+    // articlesTemp.push(req.body.articles_id);
     // if (article.articles_id.length !== req.body.articles_id) {
     //   articlesTemp = []
     //   req.body.articles_id.forEach(art => articlesTemp.push(art))
@@ -81,13 +81,13 @@ class CategoryControllers extends Connection {
     //   articlesTemp = article.articles_id
     // }
 
-    console.log("articlesTemp", articlesTemp);
+    // console.log("articlesTemp", articlesTemp);
 
     try {
       console.log("put", req.params, req.body);
       Category.findByIdAndUpdate(
         req.params.id,
-        { ...req.body, articles_id: articlesTemp },
+        { ...req.body }, {},
         async (err, data) => {
           if (err) throw err;
           return res.json({
@@ -96,7 +96,7 @@ class CategoryControllers extends Connection {
               "name",
               "icon",
               "articles_id",
-            ]),
+            ]).populate('articles_id')
           });
         }
       );

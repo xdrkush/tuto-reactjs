@@ -63,7 +63,7 @@ export const deleteCategory = (id) => {
 // Edit category
 export const editCategory = (data) => {
   return (dispatch) => {
-    return axios.put(`/category/${ data.id }`, data)
+    return axios.put(`/category/${ data._id }`, data)
       .then((res) => {
         dispatch({ type: EDIT_CATEGORY, payload: res.data})
       })

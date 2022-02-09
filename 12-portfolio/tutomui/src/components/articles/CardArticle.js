@@ -6,15 +6,12 @@ import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router";
 import { deleteArticle } from "../../store/actions/ArticlesActions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { TextField } from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

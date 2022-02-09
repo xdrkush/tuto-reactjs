@@ -18,7 +18,8 @@ class ArticleControllers extends Connection {
         "subtitle",
         "description",
         "author_id",
-      ]);
+        "category_id",
+      ]).populate("category_id");
       return res.send({
         method: req.method,
         status: "success",
@@ -55,7 +56,7 @@ class ArticleControllers extends Connection {
           category_id: category._id,
         });
 
-        category.articles_id.push(article._id)
+        category.articles_id.push(article._id);
 
         // Et on sauvegarde nos modifications
         article.save((err) => {
@@ -69,7 +70,13 @@ class ArticleControllers extends Connection {
 
         return res.json({
           message: "Article cree avec success !",
-          dbArticles: await Article.find(),
+          dbArticles: await Article.find({}, [
+            "title",
+            "subtitle",
+            "description",
+            "author_id",
+            "category_id",
+          ]).populate("category_id"),
         });
       } else return res.json({ message: "Error, l'item n'as pas été créé !" });
     } catch (error) {
@@ -79,19 +86,62 @@ class ArticleControllers extends Connection {
 
   async editOne(req, res) {
     try {
-      console.log("put", req.query, req.body);
-      Article.findByIdAndUpdate(
-        req.params.id,
-        { ...req.body },
-        async (err, data) => {
-          if (err) throw err;
-          return res.json({
-            message: "Item edit avec success !",
-            dbArticles: await Article.find(),
-          });
-        }
-      );
-    } catch {
+      const { category_id } = req.body;
+      console.log("put", req.params, req.body);
+      let article = await Article.findById(req.params.id);
+      const oldCategory = await Category.findById(article.category_id.toString().replace(/ObjectId\("(.*)"\)/, "$1"));
+      let category;
+      if (category_id) category = await Category.findOne({ name: category_id });
+      if (category_id === "") category = oldCategory;
+
+      console.log("category", category, article, oldCategory);
+
+      if (category && article) {
+        console.log("testdze", oldCategory);
+        if (oldCategory.articles_id) oldCategory.articles_id.pull(article._id);
+        category.articles_id.push(article._id);
+
+        // if (title.length > 0) article.title = title
+        // if (subtitle.length > 0) article.subtitle = subtitle
+        // if (description.length > 0) article.description = description
+        // change category to article
+        article.category_id = String(
+          category._id.toString().replace(/ObjectId\("(.*)"\)/, "$1")
+        );
+
+        // Et on sauvegarde nos modifications
+        article.save((err) => {
+          if (err) return handleError(err);
+        });
+        oldCategory.save((err) => {
+          if (err) return handleError(err);
+        });
+        category.save((err) => {
+          if (err) return handleError(err);
+        });
+
+        return res.json({
+          message: "Article edit avec success !",
+          dbArticles: await Article.find({}, [
+            "title",
+            "subtitle",
+            "description",
+            "author_id",
+            "category_id",
+          ]).populate("category_id"),
+        });
+      } else
+        return res.json({
+          message: "Article edit ERROR !",
+          dbArticles: await Article.find({}, [
+            "title",
+            "subtitle",
+            "description",
+            "author_id",
+            "category_id",
+          ]).populate("category_id"),
+        });
+    } catch (error) {
       throw error;
     }
   }

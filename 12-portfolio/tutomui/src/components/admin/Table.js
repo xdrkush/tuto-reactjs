@@ -12,27 +12,32 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import DoneIcon from '@mui/icons-material/Done';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import FormUser from "./Form";
-import { deleteCategory, getCategory } from '../../store/actions/CategoryActions'
-import { deleteArticle, getArticles } from '../../store/actions/ArticlesActions'
+import {
+  deleteCategory,
+  getCategory,
+} from "../../store/actions/CategoryActions";
+import {
+  deleteArticle,
+  getArticles,
+} from "../../store/actions/ArticlesActions";
 import { useDispatch } from "react-redux";
 
 function Row(props) {
   const { row, str } = props;
   const [open, setOpen] = React.useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleDelete = (id, str) => {
     console.log("submit", str, id);
     switch (str) {
       case "articles":
         console.log("create", str, id);
-        dispatch(deleteArticle(id))
+        dispatch(deleteArticle(id));
         setTimeout(() => dispatch(getArticles()), 777);
         break;
       case "users":
@@ -40,7 +45,7 @@ function Row(props) {
         break;
       case "category":
         console.log("create", str, id);
-        dispatch(deleteCategory(id))
+        dispatch(deleteCategory(id));
         setTimeout(() => dispatch(getCategory()), 777);
         break;
       default:
@@ -62,13 +67,19 @@ function Row(props) {
           </IconButton>
         </TableCell>
         {Object.entries(row).map((arr, index) => {
-          const key = arr[0]
-          let i = 1;
-          {/* console.log("col", arr, key); */}
+          const key = arr[0];
+          {  /* console.log("col", arr, key); */ }
+          if (key === "_id") return;
           if (key === "articles_id")
             return (
               <TableCell key={index} align="left">
                 {row.articles_id.length}
+              </TableCell>
+            );
+          else if (key === "category_id")
+            return (
+              <TableCell key={index} align="left">
+                Oups: { row.category_id && row.category_id.name}
               </TableCell>
             );
           else
@@ -93,7 +104,7 @@ function Row(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            {/* <FormUser data={row} /> */}
+            <FormUser data={row} str={str} />
           </Collapse>
         </TableCell>
       </TableRow>
@@ -114,20 +125,27 @@ export default function TableModule(props) {
                 <TableCell />
                 {data[0] &&
                   Object.keys(data[0]).map((key, index) => {
-                    {/* console.log("header table", key); */}
+                    {
+                      /* console.log("header table", key); */
+                    }
+                    {
+                      /* if (key === "author_id") return; */
+                    }
+                    if (key === "_id") return;
                     return (
                       <TableCell key={index} align="left">
                         {key}
                       </TableCell>
                     );
                   })}
-
                 <TableCell align="left">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.length > 0 &&
-                data.map((row, index) => <Row key={index} row={row} str={str} />)}
+                data.map((row, index) => (
+                  <Row key={index} row={row} str={str} />
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
