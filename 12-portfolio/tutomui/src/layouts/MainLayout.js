@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../store/actions/CategoryActions";
-
+import { checkUx } from "../store/actions/AuthActions";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
@@ -19,7 +19,6 @@ import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Footer from "../components/core/Footer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -28,6 +27,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ListItem from "@mui/material/ListItem";
 import ItemCollapse from "../components/core/ItemCollapse";
+// import Footer from "../components/core/Footer";
 
 const drawerWidth = 240;
 
@@ -80,6 +80,7 @@ const MainLayout = ({ children }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.listCategory);
+  const auth = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -90,6 +91,14 @@ const MainLayout = ({ children }) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user_token");
+    localStorage.removeItem("user_verified");
+    localStorage.removeItem("user_admin");
+    window.location.reload();
+    // navigate("/Login");
   };
 
   const IconMenuChange = () => {
@@ -121,9 +130,12 @@ const MainLayout = ({ children }) => {
   };
 
   React.useEffect(() => {
-    console.log("effect getCategory");
     dispatch(getCategory());
   }, []);
+
+  React.useEffect(() => {
+    dispatch(checkUx())
+  }, [])
 
   return (
     <ThemeProvider theme={themeUser}>
@@ -137,7 +149,7 @@ const MainLayout = ({ children }) => {
         >
           <Toolbar>
             <Toolbar>
-              { IconMenuChange() }
+              {IconMenuChange()}
               <Typography variant="h6" noWrap component="div">
                 Welcome to H-land
               </Typography>
@@ -168,19 +180,59 @@ const MainLayout = ({ children }) => {
           </DrawerHeader>
           <Divider />
           <List>
-            {["Home", "About", "Contact", "Project", "Category", "Admin"].map(
-              (link, index) => (
-                <ListItem
-                  button
-                  key={link}
-                  onClick={() => navigate({ pathname: `/${link}` })}
-                >
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={link} />
-                </ListItem>
-              )
+            {[
+              "Home",
+              "About",
+              "Contact",
+              "Project",
+              "Category"
+            ].map((link, index) => (
+              <ListItem
+                button
+                key={link}
+                onClick={() => navigate({ pathname: `/${link}` })}
+              >
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={link} />
+              </ListItem>
+            ))}
+            {/* Permission */}
+            {auth.isVerified === true && (
+              <ListItem
+                button
+                key="/Auth"
+                onClick={() => navigate({ pathname: `/Auth` })}
+              >
+                <ListItemText primary="Auth" />
+              </ListItem>
+            )}
+
+            {auth.isAdmin === true && (
+              <ListItem
+                button
+                key="/Admin"
+                onClick={() => navigate({ pathname: `/Admin` })}
+              >
+                <ListItemText primary="Admin" />
+              </ListItem>
+            )}
+
+            {auth.authenticate === false && (
+              <ListItem
+                button
+                key="/Login"
+                onClick={() => navigate({ pathname: `/Login` })}
+              >
+                <ListItemText primary="Login" />
+              </ListItem>
+            )}
+
+            {auth.authenticate === true && (
+              <ListItem button onClick={() => logout()}>
+                <ListItemText primary="LOGOUT" />
+              </ListItem>
             )}
           </List>
           <Divider />

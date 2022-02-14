@@ -20,7 +20,6 @@ class CategoryControllers extends Connection {
           ])
           .populate("articles_id");
 
-      console.log("fefezf");
       return res.send({
         method: req.method,
         status: "success",
@@ -44,7 +43,7 @@ class CategoryControllers extends Connection {
   async create(req, res) {
     try {
       const { name, icon } = req.body;
-      console.log("req.body", req.body);
+      // console.log("req.body", req.body);
       if (name && icon) {
         // On définit la construction de notre article
         const category = new Category({
@@ -68,7 +67,7 @@ class CategoryControllers extends Connection {
   }
 
   async editOne(req, res) {
-    console.log("Category", req.params, req.body);
+    // console.log("Category", req.params, req.body);
     const article = await Category.findById(req.params.id);
     // let articlesTemp = [];
     // if (req.body.articles_id !== Array) req.body.articles_id = [req.body.articles_id]
@@ -81,10 +80,7 @@ class CategoryControllers extends Connection {
     //   articlesTemp = article.articles_id
     // }
 
-    // console.log("articlesTemp", articlesTemp);
-
     try {
-      console.log("put", req.params, req.body);
       Category.findByIdAndUpdate(
         req.params.id,
         { ...req.body }, {},
@@ -107,9 +103,8 @@ class CategoryControllers extends Connection {
 
   async deleteOne(req, res) {
     try {
-      console.log("delete", req.params.id);
+      // console.log("delete", req.params.id);
       const CategoryId = await Category.findById(req.params.id);
-      console.log("CategoryId DeleteOne", CategoryId);
 
       Category.findByIdAndDelete(req.params.id, async (err, data) => {
         if (err) throw err;
@@ -125,18 +120,9 @@ class CategoryControllers extends Connection {
 
   async deleteAll(req, res) {
     try {
-      console.log("delete");
       const dbCategory = await Category.find();
 
-      async function delCom(id) {
-        // await Comment.deleteMany({ _id: e._id });
-      }
-
-      dbCategory.forEach((i) => {
-        console.log("db", i);
-      });
-
-      await Category.deleteMany();
+      // await Category.deleteMany();
 
       return res.json({
         message: "Tout les items on été supprimer avec success !",

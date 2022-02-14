@@ -22,6 +22,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  isVerified: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   isBan: { type: Boolean, default: false },
 });

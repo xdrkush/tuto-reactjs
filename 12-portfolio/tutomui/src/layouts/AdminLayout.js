@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { themeAdmin } from "../config/theme";
+import withAdmin from "../components/login/withAdmin";
+import { checkUx } from "../store/actions/AuthActions";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -22,6 +24,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { useDispatch } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -73,6 +76,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const AdminLayout = ({ children }) => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -82,6 +86,8 @@ const AdminLayout = ({ children }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  React.useEffect(() => dispatch(checkUx()))
 
   return (
     <ThemeProvider theme={themeAdmin}>

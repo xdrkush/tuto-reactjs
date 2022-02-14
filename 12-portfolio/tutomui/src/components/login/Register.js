@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerUx } from "../../store/actions/LoginActions";
+import { registerUx } from "../../store/actions/AuthActions";
 import { Box } from "@mui/system";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
@@ -16,7 +16,7 @@ const FormRegister = () => {
   const handleForm = async (e) => {
     e.preventDefault();
 
-    console.log("submit form register");
+    // console.log("submit form register");
 
     if (name && email && password === passwordConfirm) {
       await dispatch(registerUx({ name, email, password }));

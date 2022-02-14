@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 
 export default function CardUsers(props) {
   const { user } = props;
-  console.log('state props card', props)
+  // console.log('state props card', props)
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>

@@ -9,8 +9,9 @@ import thunk from "redux-thunk";
  * Reducers
  * ******** */
 import { ArticlesReducer } from "./reducers/ArticlesReducers";
+import { UsersReducer } from "./reducers/UsersReducers";
 import { CategoryReducer } from "./reducers/CategoryReducers";
-import { LoginReducer } from "./reducers/LoginReducers";
+import { AuthReducer } from "./reducers/AuthReducers";
 
 /*
  * All (Root) Reducers
@@ -18,7 +19,8 @@ import { LoginReducer } from "./reducers/LoginReducers";
 const rootReducer = combineReducers({
   articles: ArticlesReducer,
   category: CategoryReducer,
-  login: LoginReducer
+  users: UsersReducer,
+  auth: AuthReducer
 });
 
 /*

@@ -15,10 +15,10 @@ import { POST_ARTICLE, GET_ALL_ARTICLE, GET_ID_ARTICLE, DELETE_ARTICLE, EDIT_ART
 // getAll Article
 export const getArticles = (data) => {
   return (dispatch) => {
-    console.log('reducers get article')
+    // console.log('reducers get article')
     return axios.get("/article")
       .then((res) => {
-        console.log('getArticles', res.data)
+        // console.log('getArticles', res.data)
         dispatch({ type: GET_ALL_ARTICLE, payload: res.data})
       })
       .catch(err => console.log(err));
@@ -28,10 +28,10 @@ export const getArticles = (data) => {
 // getID Article
 export const getArticleID = (id) => {
   return (dispatch) => {
-    console.log('reducers get article')
+    // console.log('reducers get article')
     return axios.get(`/article/${ id }`)
       .then((res) => {
-        console.log('getArticleID', res.data)
+        // console.log('getArticleID', res.data)
         dispatch({ type: GET_ID_ARTICLE, payload: res.data})
       })
       .catch(err => console.log(err));

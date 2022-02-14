@@ -1,17 +1,14 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
 
-const withAuth = (Component) => {
+export default function withAuth (Component) {
   const AuthRoute = () => {
-    const isAuth = localStorage.getItem("user_token");
-    if (isAuth && isAuth !== 'visitor' && isAuth.length >= 10) {
-      return <Component />;
-    } else {
-      return <Navigate to="/Login" />;
-    }
+    const token = jwt_decode(localStorage.getItem("user_token"));
+    if (token.isVerified === true) return <Component />;
+    else return <Navigate to="/Login" />;
   };
 
   return AuthRoute;
 };
 
-export default withAuth;

@@ -13,7 +13,7 @@ const CategoryIDPage = () => {
     if (!state) navigate("/Category");
   }, [navigate, state]);
 
-  console.log("state ici", state);
+  // console.log("state ici", state);
 
   return (
     <Box>

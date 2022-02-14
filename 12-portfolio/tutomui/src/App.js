@@ -14,16 +14,21 @@ import ArticleID from "./pages/ArticleIDPage";
 import Login from "./pages/LoginPage";
 import NotFound from "./pages/NotFoundPage";
 
+// Auth
+import Auth from "./pages/AuthPage";
+
+// Admin
 import Admin from "./pages/AdminPage";
 import AWebsite from "./pages/admin/AdminWebsite";
 import ACategory from "./pages/admin/AdminCategory";
 import AArticle from "./pages/admin/AdminArticle";
 import AUser from "./pages/admin/AdminUser";
 
+// checkUx()
 const AppRoutes = () => (
   <MainLayout>
     <Routes>
-      <Route path="" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="Home" element={<Home />} />
       <Route path="About" exact element={<About />} />
       <Route path="Category" exact element={<Category />} />
@@ -47,6 +52,13 @@ const AdminRoutes = () => (
     </Routes>
   </AdminLayout>
 );
+const AuthRoutes = () => (
+  <MainLayout>
+    <Routes>
+      <Route path="" element={<Auth />} />
+    </Routes>
+  </MainLayout>
+);
 
 export default function App() {
   return (
@@ -54,7 +66,8 @@ export default function App() {
       <Routes>
         <Route path="/*" element={<AppRoutes />} />
         <Route path="/Admin/*" element={<AdminRoutes />} />
-        <Route path="*" exact element={<NotFound />} />
+        <Route path="/Auth/*" element={<AuthRoutes />} />
+        <Route path="*/*" element={<NotFound />} />
       </Routes>
     </HashRouter>
   );

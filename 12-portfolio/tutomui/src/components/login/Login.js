@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUx, checkUx } from "../../store/actions/LoginActions";
+import { loginUx } from "../../store/actions/AuthActions";
 import { useNavigate } from "react-router";
 import { Box } from "@mui/system";
 import { TextField } from "@mui/material";
@@ -15,14 +15,13 @@ const Login = () => {
   // ici la fonction est asynchrone
   const handleForm = async (e) => {
     e.preventDefault();
-    console.log("submit form login");
+    // console.log("submit form login");
 
     if (name && password) {
-      await dispatch(loginUx({ name, password }));
+      dispatch(loginUx({ name, password }));
       setName("");
       setPassword("");
-      dispatch(checkUx());
-      navigate("/Admin");
+      // setTimeout(() => navigate("/Admin"), 1200)
     }
   };
 

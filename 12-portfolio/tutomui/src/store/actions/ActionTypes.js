@@ -20,3 +20,10 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
 export const CHECK_AUTH = "CHECK_AUTH"
+
+// Users
+export const POST_USERS = "POST_USERS";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_ID_USERS = "GET_ID_USERS";
+export const EDIT_USERS = "EDIT_USERS";
+export const DELETE_USERS = "DELETE_USERS";

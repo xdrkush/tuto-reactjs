@@ -77,7 +77,7 @@ export default function PrimarySearchAppBar(props) {
   const handleForm = async (e) => {
     e.preventDefault();
     if (name && icon) {
-      console.log('Form:', { name, icon })
+      // console.log('Form:', { name, icon })
       await dispatch(createArticle({ name, icon }))
       setName("");
       setIcon("");

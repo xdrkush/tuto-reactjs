@@ -55,18 +55,18 @@ router
   .delete(new MessageControllers().deleteOne);
 
 router
-  .route("/api/user")
+  .route("/api/users")
   .get(new UserControllers().getAll)
   .delete(new UserControllers().deleteAll);
 
 router
-  .route("/api/user/:id")
+  .route("/api/users/:id")
   .get(new UserControllers().getId)
   .put(new UserControllers().editOne)
   .delete(new UserControllers().deleteOne);
 
 router.route("/api/login").post(new UserControllers().login); // Connected
 router.route("/api/register").post(new UserControllers().register); // Register
-// router.route("/api/checkauth").get(new UserControllers().checkauth); // Check session
+router.route("/api/checkauth/:token").get(new UserControllers().checkAuth); // Check session
 
 module.exports = router;

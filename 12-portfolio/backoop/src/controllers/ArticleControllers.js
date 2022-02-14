@@ -43,10 +43,9 @@ class ArticleControllers extends Connection {
   async create(req, res) {
     try {
       const { title, description, subtitle, author_id, category_id } = req.body;
-      console.log("req.body", req.body);
+      // console.log("req.body", req.body);
       if (title && description) {
         const category = await Category.findOne({ name: category_id });
-        console.log("category", category);
         // On définit la construction de notre article
         const article = new Article({
           title,
@@ -76,7 +75,7 @@ class ArticleControllers extends Connection {
             "description",
             "author_id",
             "category_id",
-          ]).populate("category_id"),
+          ]).populate("category_id")
         });
       } else return res.json({ message: "Error, l'item n'as pas été créé !" });
     } catch (error) {
@@ -86,24 +85,24 @@ class ArticleControllers extends Connection {
 
   async editOne(req, res) {
     try {
-      const { category_id } = req.body;
-      console.log("put", req.params, req.body);
+      // console.log("put", req.params, req.body);
+      const { category_id, title, subtitle, description } = req.body;
       let article = await Article.findById(req.params.id);
-      const oldCategory = await Category.findById(article.category_id.toString().replace(/ObjectId\("(.*)"\)/, "$1"));
+      let oldCategory = await Category.findById(article.category_id.toString().replace(/ObjectId\("(.*)"\)/, "$1"));
       let category;
       if (category_id) category = await Category.findOne({ name: category_id });
       if (category_id === "") category = oldCategory;
-
-      console.log("category", category, article, oldCategory);
+      if (oldCategory === null) oldCategory = await Category.findOne({name: req.body.category_id})
 
       if (category && article) {
-        console.log("testdze", oldCategory);
         if (oldCategory.articles_id) oldCategory.articles_id.pull(article._id);
         category.articles_id.push(article._id);
 
-        // if (title.length > 0) article.title = title
-        // if (subtitle.length > 0) article.subtitle = subtitle
-        // if (description.length > 0) article.description = description
+        // change value 
+        article.title = title;
+        article.subtitle = subtitle;
+        article.description = description;
+
         // change category to article
         article.category_id = String(
           category._id.toString().replace(/ObjectId\("(.*)"\)/, "$1")
@@ -148,10 +147,9 @@ class ArticleControllers extends Connection {
 
   async deleteOne(req, res) {
     try {
-      console.log("delete", req.query, req.params.id);
+      // console.log("delete", req.query, req.params.id);
       const ArticleId = await Article.findById(req.params.id);
-      console.log("ArticleId DeleteOne", ArticleId);
-
+      
       Article.findByIdAndDelete(req.params.id, async (err, data) => {
         if (err) throw err;
         return res.json({
@@ -166,7 +164,7 @@ class ArticleControllers extends Connection {
 
   async deleteAll(req, res) {
     try {
-      console.log("delete");
+      // console.log("delete");
       await Article.deleteMany();
 
       return res.json({

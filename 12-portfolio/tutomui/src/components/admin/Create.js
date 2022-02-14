@@ -21,7 +21,7 @@ export default function CreateModule(props) {
   const [form, setForm] = React.useState({ ...data });
   const category = useSelector(state => state.category.listCategory)
 
-  console.log("props", props);
+  // console.log("props", props);
 
   const handleChange = (prop) => (event) => {
     setForm({ ...form, [prop]: event.target.value });
@@ -32,23 +32,23 @@ export default function CreateModule(props) {
   }, []);
 
   const submitForm = () => {
-    console.log("submit", form, str);
+    // console.log("submit", form, str);
     switch (str) {
       case "articles":
-        console.log("create", str, form);
+        // console.log("create", str, form);
         dispatch(createArticle(form));
         setTimeout(() => dispatch(getArticles()), 777);
         break;
       case "users":
-        console.log("create", str, form);
+        // console.log("create", str, form);
         break;
       case "category":
-        console.log("create", str, form);
+        // console.log("create", str, form);
         dispatch(createCategory(form));
         setTimeout(() => dispatch(getCategory()), 777);
         break;
       default:
-        console.log("error submit");
+        // console.log("error submit");
         break;
     }
   };

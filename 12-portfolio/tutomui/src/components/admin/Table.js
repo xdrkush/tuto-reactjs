@@ -16,7 +16,7 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import FormUser from "./Form";
+import Form from "./Form";
 import {
   deleteCategory,
   getCategory,
@@ -33,25 +33,37 @@ function Row(props) {
   const dispatch = useDispatch();
 
   const handleDelete = (id, str) => {
-    console.log("submit", str, id);
+    // console.log("submit", str, id);
     switch (str) {
       case "articles":
-        console.log("create", str, id);
+        // console.log("create", str, id);
         dispatch(deleteArticle(id));
         setTimeout(() => dispatch(getArticles()), 777);
         break;
       case "users":
-        console.log("create", str, id);
+        // console.log("create", str, id);
         break;
       case "category":
-        console.log("create", str, id);
+        // console.log("create", str, id);
         dispatch(deleteCategory(id));
         setTimeout(() => dispatch(getCategory()), 777);
         break;
       default:
-        console.log("error submit");
+        // console.log("error submit");
         break;
     }
+  };
+
+  const TableCellChips = (props) => {
+    const { val } = props;
+    return (
+      <TableCell align="left">
+        <Chip
+          label={val === true ? "true" : "false"}
+          color={val === true ? "success" : "primary"}
+        />
+      </TableCell>
+    );
   };
 
   return (
@@ -67,8 +79,11 @@ function Row(props) {
           </IconButton>
         </TableCell>
         {Object.entries(row).map((arr, index) => {
-          const key = arr[0];
-          {  /* console.log("col", arr, key); */ }
+          const key = arr[0],
+            val = arr[1];
+          {
+            /* console.log("col", arr, key); */
+          }
           if (key === "_id") return;
           if (key === "articles_id")
             return (
@@ -79,9 +94,15 @@ function Row(props) {
           else if (key === "category_id")
             return (
               <TableCell key={index} align="left">
-                Oups: { row.category_id && row.category_id.name}
+                {row.category_id && row.category_id.name}
               </TableCell>
             );
+          else if (key === "isVerified")
+            return <TableCellChips key={index} val={row.isVerified} />;
+          else if (key === "isAdmin")
+            return <TableCellChips key={index} val={row.isAdmin} />;
+          else if (key === "isBan")
+            return <TableCellChips key={index} val={row.isBan} />;
           else
             return (
               <TableCell key={index} align="left">
@@ -104,7 +125,7 @@ function Row(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <FormUser data={row} str={str} />
+            <Form data={row} str={str} />
           </Collapse>
         </TableCell>
       </TableRow>
@@ -114,7 +135,7 @@ function Row(props) {
 
 export default function TableModule(props) {
   const { data, str } = props;
-  console.log("data", data, Object.keys(data));
+  // console.log("data", data, Object.keys(data));
   return (
     <Grid container columns={16}>
       <Grid item xs={16}>
@@ -132,6 +153,7 @@ export default function TableModule(props) {
                       /* if (key === "author_id") return; */
                     }
                     if (key === "_id") return;
+                    if (key === "__v") return;
                     return (
                       <TableCell key={index} align="left">
                         {key}

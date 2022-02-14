@@ -1,7 +1,5 @@
 import withAdmin from "../components/login/withAdmin";
 
-import Create from "../components/admin/Create";
-
 const AdminPage = () => {
   const data = {
     address: "22 rue des olivettes",
@@ -13,4 +11,4 @@ const AdminPage = () => {
 };
 
 // export default withAdmin(AdminPage);
-export default AdminPage;
+export default withAdmin(AdminPage);

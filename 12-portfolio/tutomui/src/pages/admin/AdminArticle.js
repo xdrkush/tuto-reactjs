@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import withAdmin from "../../components/login/withAdmin";
 
 import { Grid, Typography } from "@mui/material";
 
@@ -36,4 +37,4 @@ const AArticle = () => {
   );
 };
 
-export default AArticle;
+export default withAdmin(AArticle);

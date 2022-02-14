@@ -18,7 +18,7 @@ const ArticlePage = () => {
   };
 
   useEffect(() => {
-    console.log("effect getCategory");
+    // console.log("effect getCategory");
     dispatch(getCategory());
   }, []);
 

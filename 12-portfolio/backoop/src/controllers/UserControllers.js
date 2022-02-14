@@ -1,5 +1,9 @@
+const bcrypt = require("bcrypt");
 const Connection = require("../config/ConnectionDB");
 const User = require("../models/UserModel");
+const jwt = require("jsonwebtoken");
+
+require("dotenv").config();
 
 // Ramasse miette (clean de l'objet)
 const privateProps = new WeakMap();
@@ -12,7 +16,13 @@ class UserControllers extends Connection {
 
   async getAll(req, res) {
     try {
-      const dbUser = await User.find();
+      const dbUser = await User.find({}, [
+        "name",
+        "email",
+        "isVerified",
+        "isAdmin",
+        "isBan",
+      ]);
       return res.send({
         method: req.method,
         status: "success",
@@ -26,79 +36,97 @@ class UserControllers extends Connection {
 
   async login(req, res) {
     try {
-      return res.json({ login: "Login !!!" });
-    } catch {
+      // console.log('login controller', req.body)
+      const { name, password } = req.body;
+      const userAuthEmail = await User.findOne({ email: name }),
+        userAuthPseudo = await User.findOne({ name: name }),
+        user = userAuthEmail || userAuthPseudo;
+      if (!user)
+        return res.json({ error: "l' email ou le pseudo n'existe pas." });
+      else if (user) {
+        bcrypt.compare(password, user.password, (err, same) => {
+          if (err) throw new Error(err);
+          else if (same) {
+            const token = jwt.sign(
+              {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                pseudo: user.pseudo,
+                isVerified: user.isVerified,
+                isAdmin: user.isAdmin,
+              },
+              process.env.JWT_TOKEN,
+              {
+                expiresIn: "4h",
+              }
+            );
+            return res.send({
+              method: req.method,
+              status: "success",
+              flash: "Login Success !",
+              token: token,
+            });
+          }
+        });
+      } else return res.json({ error: "Une erreur c'est produite." });
+    } catch (error) {
       throw error;
     }
   }
 
   async register(req, res) {
     try {
-      const b = req.body;
-      console.log("req.body", req.body);
-      if (b.name && b.password) {
-        // On définit la construction de notre User
-        const user = new User({
-          name: b.name,
-          password: b.password,
-        });
+      const { email, name, password } = req.body;
+      const checkEmail = await User.findOne({ email });
+      const checkPseudo = await User.findOne({ name });
 
-        // Et on sauvegarde nos modifications
-        user.save((err) => {
-          if (err) return handleError(err);
-        });
-
+      if (checkEmail)
         return res.json({
-          message: "Users cree avec success !",
+          status: false,
+          message: "error: Email déja utiliser !",
         });
-      } else return res.json({ message: "Error, l'item n'as pas été créé !" });
-    } catch {
-      throw error;
-    }
-  }
-
-  async editOne(req, res) {
-    try {
-      console.log("put", req.query, req.body);
-      User.findByIdAndUpdate(
-        req.params.id,
-        { ...req.body },
-        async (err, data) => {
-          if (err) throw err;
-          return res.json({
-            message: "User edit avec success !",
-          });
-        }
-      );
-    } catch {
+      if (checkPseudo)
+        return res.json({
+          status: false,
+          message: "error: Pseudo déja utiliser !",
+        });
+      if (name && email && password) {
+        const hash = await bcrypt.hash(password, 16);
+        // console.log("register", name, email, hash);
+        User.create({ ...req.body, password: hash }, (err, data) => {
+          if (err) throw new Error(err);
+          else
+            return res.json({
+              status: true,
+              message: "Votre Compte à bien été créé.",
+            });
+        });
+      } else return res.json({ message: "Error, l'user n'as pas été créé !" });
+    } catch (error) {
       throw error;
     }
   }
 
   async checkAuth(req, res) {
-    console.log("check token", req.params.token);
-    const user = jwt.verify(
+    console.log("check token");
+    const tokenVerif = jwt.verify(
       req.params.token,
-      process.env.SIGN_JWT,
+      process.env.JWT_TOKEN,
       (err, decoded) => {
         if (err) return;
         return decoded;
       }
     );
     try {
-      // JWT
-      return res.send({
-        method: req.method,
-        status: "success",
-        message: "Login Auth Success !",
-        user: {
-          name: user.name,
-          email: user.email,
-          authenticate: user.authenticate,
-          isVerified: user.isVerified,
-          isAdmin: user.isAdmin,
-        },
-      });
+      // console.log('checkAuth', tokenVerif)
+      if (tokenVerif)
+        return res.send({
+          method: req.method,
+          status: "success",
+          message: "Login Auth Success !",
+          token: req.params.token,
+        });
     } catch (error) {
       throw error;
     }
@@ -106,7 +134,7 @@ class UserControllers extends Connection {
 
   async editOne(req, res) {
     try {
-      console.log("put", req.query, req.body);
+      console.log("put", req.params, req.query, req.body);
       User.findByIdAndUpdate(
         req.params.id,
         { ...req.body },
@@ -114,7 +142,13 @@ class UserControllers extends Connection {
           if (err) throw err;
           return res.json({
             message: "Item edit avec success !",
-            dbUsers: await User.find(),
+            dbUser: await User.find({}, [
+              "name",
+              "email",
+              "isVerified",
+              "isAdmin",
+              "isBan",
+            ]),
           });
         }
       );
@@ -134,16 +168,15 @@ class UserControllers extends Connection {
 
   async deleteOne(req, res) {
     try {
-      console.log("delete", req.query, req.params.id);
+      // console.log("delete", req.query, req.params.id);
       const userId = await User.findById(req.params.id);
-      console.log("UserId DeleteOne", userId);
 
       User.findByIdAndDelete(req.params.id, async (err, data) => {
         if (err) throw err;
         return res.json({
           message:
             "les comments à été supprimer avec success et l'User aussi !",
-            dbUsers: await User.find(),
+          dbUsers: await User.find(),
         });
       });
     } catch {
@@ -153,16 +186,16 @@ class UserControllers extends Connection {
 
   async deleteAll(req, res) {
     try {
-      console.log("delete");
+      // console.log("delete");
       const dbUser = await User.find();
 
       async function delCom(id) {
         // await Comment.deleteMany({ _id: e._id });
       }
 
-      dbUser.forEach((i) => {
-        console.log("db", i);
-      });
+      // dbUser.forEach((i) => {
+      //   // console.log("db", i);
+      // });
 
       //   await User.deleteMany();
 

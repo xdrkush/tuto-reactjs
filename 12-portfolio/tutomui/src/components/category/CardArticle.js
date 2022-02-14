@@ -40,7 +40,7 @@ const CardArticle = (props) => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    console.log("Form:", { id: data.id });
+    // console.log("Form:", { id: data.id });
     await dispatch(editArticle({ id: data.id }));
     await dispatch(getArticles());
   };

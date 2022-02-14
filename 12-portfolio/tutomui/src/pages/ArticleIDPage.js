@@ -11,7 +11,7 @@ const ArticleIDPage = () => {
     if (!state) navigate(-1);
   }, [navigate, state]);
 
-  console.log("state", state);
+  // console.log("state", state);
 
   return (
     <Box>

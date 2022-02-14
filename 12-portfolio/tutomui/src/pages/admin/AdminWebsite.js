@@ -1,4 +1,6 @@
 import React from "react";
+import withAdmin from "../../components/login/withAdmin";
+
 import { Grid } from "@mui/material";
 
 const AWebsite = () => {
@@ -11,4 +13,4 @@ const AWebsite = () => {
   );
 };
 
-export default AWebsite;
+export default withAdmin(AWebsite);

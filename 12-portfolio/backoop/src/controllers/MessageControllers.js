@@ -36,7 +36,7 @@ class MessageControllers extends Connection {
   async create (req, res) {
     try {
       const { name, email, subject, message } = req.body;
-      console.log("req.body", req.body);
+      // console.log("req.body", req.body);
       if (name && description) {
         // On définit la construction de notre article
         const message = new Message({
@@ -60,7 +60,7 @@ class MessageControllers extends Connection {
 
   async editOne (req, res) {
     try {
-      console.log("put", req.query, req.body);
+      // console.log("put", req.query, req.body);
       Message.findByIdAndUpdate(
         req.params.id,
         { ...req.body },
@@ -79,17 +79,16 @@ class MessageControllers extends Connection {
 
   async deleteOne (req, res) {
     try {
-      console.log("delete", req.query, req.params.id);
+      // console.log("delete", req.query, req.params.id);
       const MessageId = await Message.findById(req.params.id);
-      console.log("MessageId DeleteOne", MessageId);
 
       if (MessageId.comment.length > 0) {
         for (let i = 0; i < MessageId.comment.length; i++) {
-          console.log(
-            "Le commentaire de " +
-              MessageId.comment[i].author +
-              " à bien été supprimer !"
-          );
+          // console.log(
+          //   "Le commentaire de " +
+          //     MessageId.comment[i].author +
+          //     " à bien été supprimer !"
+          // );
           await Comment.findByIdAndDelete(MessageId.comment[i]._id);
         }
 
@@ -117,7 +116,7 @@ class MessageControllers extends Connection {
 
   async deleteAll (req, res) {
     try {
-      console.log("delete");
+      // console.log("delete");
       const dbMessage = await Message.find();
 
       async function delCom(id) {
@@ -125,7 +124,7 @@ class MessageControllers extends Connection {
       }
 
       dbMessage.forEach((i) => {
-        console.log("db", i);
+        // console.log("db", i);
       });
 
       //   await Message.deleteMany();

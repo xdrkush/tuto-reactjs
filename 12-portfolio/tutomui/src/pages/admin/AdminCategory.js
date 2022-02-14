@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import withAdmin from "../../components/login/withAdmin";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../../store/actions/CategoryActions";
 import { Grid, Typography } from "@mui/material";
@@ -16,7 +18,7 @@ const ACategory = () => {
     dispatch(getCategory())
   }, [])
 
-  console.log('category', category)
+  // console.log('category', category)
   return (
     <Grid container columns={16}>
       <Grid item xs={16}>
@@ -32,4 +34,4 @@ const ACategory = () => {
   );
 };
 
-export default ACategory;
+export default withAdmin(ACategory);

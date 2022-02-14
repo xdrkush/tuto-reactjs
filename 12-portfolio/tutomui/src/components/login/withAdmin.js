@@ -1,17 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import jwt_decode from 'jwt-decode'
 
-const withAdmin = (Component) => {
+export default function withAdmin (Component) {
   const AdminRoute = () => {
-    const isAdmin = localStorage.getItem("user_admin");
-    if (isAdmin) {
-      return <Component />;
-    } else {
-      return <Navigate to="/Login" />;
-    }
+    const token = jwt_decode(localStorage.getItem("user_admin"));
+    if (token.isAdmin === true) return <Component />;
+    else return <Navigate to="/Login" />;
   };
 
   return AdminRoute;
 };
-
-export default withAdmin;

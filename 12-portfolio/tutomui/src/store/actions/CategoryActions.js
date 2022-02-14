@@ -15,10 +15,10 @@ import { POST_CATEGORY, GET_ALL_CATEGORY, GET_ID_CATEGORY, DELETE_CATEGORY, EDIT
 // getAll category
 export const getCategory = (data) => {
   return (dispatch) => {
-    console.log('reducers get category')
+    // console.log('reducers get category')
     return axios.get("/category")
       .then((res) => {
-        console.log('getcategory', res.data)
+        // console.log('getcategory', res.data)
         dispatch({ type: GET_ALL_CATEGORY, payload: res.data})
       })
       .catch(err => console.log(err));
@@ -28,10 +28,10 @@ export const getCategory = (data) => {
 // getID category
 export const getCategoryID = (id) => {
   return (dispatch) => {
-    console.log('reducers get category')
+    // console.log('reducers get category')
     return axios.get(`/category/${ id }`)
       .then((res) => {
-        console.log('getcategoryID', res.data)
+        // console.log('getcategoryID', res.data)
         dispatch({ type: GET_ID_CATEGORY, payload: res.data})
       })
       .catch(err => console.log(err));
