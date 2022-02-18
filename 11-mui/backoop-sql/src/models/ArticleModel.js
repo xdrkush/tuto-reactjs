@@ -40,11 +40,11 @@ Article.getById = function (id, result) {
 
 // Create
 Article.create = function (newArticle, result) {
+  const { title, price } = newArticle
   connection.getConnection(function (error, conn) {
     conn.query(`
-        INSERT INTO articles (title, price)
-        VALUES ("${newArticle.title}", ${newArticle.price})
-    `, (error, data) => {
+        INSERT INTO articles SET title=:title, price=:price
+    `, {title, price}, (error, data) => {
         if (error) throw error;
         conn.query(`SELECT * FROM articles`, (error, data) => {
           if (error) throw error;
@@ -58,14 +58,15 @@ Article.create = function (newArticle, result) {
 
 // Edit One
 Article.editOne = function (articleObj, result) {
+  const { title, price, id } = articleObj;
   console.log("edit", typeof articleObj.id);
   connection.getConnection(function (error, conn) {
     conn.query(`
         UPDATE articles 
-            SET title = '${articleObj.title}',
-                price = ${articleObj.price}
-            WHERE id = ${articleObj.id};
-      `, (error, data) => {
+            SET title = :title,
+                price = :price
+            WHERE id = :id;
+      `, { title, price, id }, (error, data) => {
         if (error) throw error;
         conn.query(`SELECT * FROM articles`, (error, data) => {
           if (error) throw error;
