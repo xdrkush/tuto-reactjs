@@ -6,58 +6,64 @@ import { Typography } from "@mui/material";
 
 const HeaderHome = (props) => {
   return (
-    <Box sx={{ textAlign: "center", maxHeight: "80vh", width: "100%" }}>
-      <Box sx={{ textAlign: "center", height: "100%", width: "100%" }}>
-        <Typography
-          className="title_header"
-          variant="h1"
-          sx={{
-            color: 'primary',
-            zIndex: '5',
-            position: "relative",
-            top: '100px',
-          }}
-        >
-          Kusholio
-        </Typography>
-        <Typography
-          className="title_header"
-          variant="h2"
-          sx={{
-            zIndex: '5',
-            position: "relative",
-            top: '100px',
-          }}
-        >
-          Développeur-Web
-        </Typography>
-        <Typography
-          className="title_header"
-          variant="h3"
-          sx={{
-            zIndex: '5',
-            position: "relative",
-            top: '100px',
-          }}
-        >
-          Open-source Maniac
-        </Typography>
-        <Box
-          sx={{
-            position: "relative",
-            top: '-150px',
-          }}
-        >
-          <Circle className="ellipse" />
-        </Box>
-        <Box
-          sx={{
-            position: "relative",
-            top: "-390px"
-          }}
-        >
-          <Unicorn className="unicorn" />
-        </Box>
+    <Box
+      sx={{
+        textAlign: "center",
+        position: "relative",
+        minHeight: "80vh",
+        width: "100%",
+      }}
+    >
+      <Typography
+        className="title_header"
+        variant="h1"
+        sx={{
+          color: "primary",
+          fontSize: "60px",
+          zIndex: "5",
+          position: "relative",
+          top: "100px",
+        }}
+      >
+        Kusholio
+      </Typography>
+      <Typography
+        className="title_header"
+        variant="h2"
+        sx={{
+          zIndex: "5",
+          fontSize: "60px",
+          position: "relative",
+          top: "100px",
+        }}
+      >
+        Développeur-Web
+      </Typography>
+      <Typography
+        className="title_header"
+        variant="h3"
+        sx={{
+          zIndex: "5",
+          fontSize: "60px",
+          position: "relative",
+          top: "100px",
+        }}
+      >
+        Open-source Maniac
+      </Typography>
+      <Box
+        sx={{
+          zIndex: '0',
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          mx: "auto",
+          p: '25px'
+        }}
+      >
+        <Unicorn className="unicorn" />
       </Box>
     </Box>
   );

@@ -131,7 +131,7 @@ class UserControllers extends Connection {
       throw error;
     }
   }
-
+  
   async editOne(req, res) {
     try {
       console.log("put", req.params, req.query, req.body);

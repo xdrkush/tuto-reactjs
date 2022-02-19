@@ -13,7 +13,7 @@ import { POST_ARTICLE, GET_ALL_ARTICLE, GET_ID_ARTICLE, DELETE_ARTICLE, EDIT_ART
  * ******* */
 
 // getAll Article
-export const getArticles = (data) => {
+export const getArticles = () => {
   return (dispatch) => {
     // console.log('reducers get article')
     return axios.get("/article")

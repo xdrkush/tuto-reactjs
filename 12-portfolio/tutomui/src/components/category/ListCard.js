@@ -6,7 +6,7 @@ const ListCard = (props) => {
   const { list, search } = props;
   const S_title = (item) =>
     item.name.toLowerCase().includes(search.toLowerCase());
-  const filterList = list.filter((item) => S_title(item))
+  const filterList = list.filter((item) => S_title(item));
 
   return (
     <Container maxWidth="lg">
@@ -16,16 +16,12 @@ const ListCard = (props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          flexDirection: { md: "row", xs: "column" },
+          flexDirection: { md: "row" },
           flexWrap: "wrap",
         }}
       >
         {filterList.map((category, index) => {
-          return (
-            <Box key={index} sx={{ p: 1 }}>
-              <CardArticle key={index} data={category} />
-            </Box>
-          );
+          return <CardArticle key={index} data={category} />;
         })}
       </Box>
     </Container>

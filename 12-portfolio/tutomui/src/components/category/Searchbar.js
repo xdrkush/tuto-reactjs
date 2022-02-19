@@ -2,22 +2,24 @@ import * as React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { getArticles, createArticle } from "../../store/actions/ArticlesActions";
+import {
+  getArticles,
+  createArticle,
+} from "../../store/actions/ArticlesActions";
 
 import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Typography } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -78,47 +80,102 @@ export default function PrimarySearchAppBar(props) {
     e.preventDefault();
     if (name && icon) {
       // console.log('Form:', { name, icon })
-      await dispatch(createArticle({ name, icon }))
+      await dispatch(createArticle({ name, icon }));
       setName("");
       setIcon("");
-      await dispatch(getArticles())
+      await dispatch(getArticles());
     }
   };
 
   const menuId = "primary-search-account-menu";
 
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <Search onChange={(e) => handleSearch(e.target.value)} >
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleClickOpen}
-              color="inherit"
-            >
-              <AddIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
+    <Box
+      sx={{
+        textAlign: "left",
+        display: "flex",
+        flexDirection: "row",
+        alignSelf: "center",
+        p: "50px",
+      }}
+    >
+      <Box
+        sx={{
+          textAlign: "left",
+          py: "50px",
+          display: "flex",
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: "#1CD6C1",
+            height: "4px",
+            mx:3,
+            my: "40px",
+            width: "75px",
+          }}
+        />
+        <Box>
+          <Typography
+            className="title_header"
+            variant="h4"
+            sx={{
+              color: "primary",
+              zIndex: "5",
+              fontWeight: "bold",
+              fontSize: "38px",
+            }}
+          >
+            Catégories
+          </Typography>
+          <Typography
+            className="title_header"
+            variant="body"
+            sx={{
+              zIndex: "5",
+              fontSize: "16px",
+              textAlign: "left",
+            }}
+          >
+            Découvrez toutes mes ressources libres.
+          </Typography>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: "50%",
+          py: "50px",
+          display: "flex",
+          alignSelf: 'end',
+          justifyContent: "end"
+        }}
+      >
+        <Search sx={{height: '45px'}} onChange={(e) => handleSearch(e.target.value)}>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <Box sx={{ display: "flex" }}>
+          <IconButton
+            size="medium"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleClickOpen}
+            color="inherit"
+          >
+            <AddIcon />
+          </IconButton>
+        </Box>
+      </Box>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create Article</DialogTitle>
-        <DialogContent sx={{ mx: { md: 2, sm: 0} }}>
+        <DialogContent sx={{ mx: { md: 2, sm: 0 } }}>
           <TextField
             style={{ minWidth: "70%" }}
             value={name}

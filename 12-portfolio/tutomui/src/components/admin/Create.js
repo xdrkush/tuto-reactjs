@@ -22,7 +22,6 @@ export default function CreateModule(props) {
   const category = useSelector(state => state.category.listCategory)
 
   // console.log("props", props);
-
   const handleChange = (prop) => (event) => {
     setForm({ ...form, [prop]: event.target.value });
   };
@@ -31,19 +30,19 @@ export default function CreateModule(props) {
     dispatch(getCategory())
   }, []);
 
-  const submitForm = () => {
-    // console.log("submit", form, str);
-    switch (str) {
+  const submitForm = (params) => {
+    // console.log("submit", form, params);
+    switch (params) {
       case "articles":
-        // console.log("create", str, form);
+        // console.log("create", params, form);
         dispatch(createArticle(form));
-        setTimeout(() => dispatch(getArticles()), 777);
+        // setTimeout(() => dispatch(getArticles()), 777);
         break;
       case "users":
-        // console.log("create", str, form);
+        // console.log("create", params, form);
         break;
       case "category":
-        // console.log("create", str, form);
+        // console.log("create", params, form);
         dispatch(createCategory(form));
         setTimeout(() => dispatch(getCategory()), 777);
         break;
@@ -57,7 +56,7 @@ export default function CreateModule(props) {
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
       {Object.entries(data).map((arr, index) => {
         const key = arr[0]
-        if (key === "id") return;
+        if (key === "_id") return;
         if (key === "author_id") return;
         if (key === "category_id") {
           return (
@@ -84,7 +83,7 @@ export default function CreateModule(props) {
             <TextField
               key={index}
               id={`outlined-adornment-${key}`}
-              value={form[`${key}`]}
+              value={form[`${key}`]} // form.name
               onChange={handleChange(`${key}`)}
               label={key}
             />
@@ -92,7 +91,7 @@ export default function CreateModule(props) {
         }
       })}
 
-      <Button onClick={() => submitForm()}>Submit</Button>
+      <Button onClick={() => submitForm(str)}>Submit</Button>
     </Box>
   );
 }

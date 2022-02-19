@@ -20,7 +20,7 @@ class CategoryControllers extends Connection {
           ])
           .populate("articles_id");
 
-      return res.send({
+      return res.json({
         method: req.method,
         status: "success",
         message: "Hello World",

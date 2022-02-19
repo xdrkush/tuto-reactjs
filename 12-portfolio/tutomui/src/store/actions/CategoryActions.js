@@ -43,7 +43,8 @@ export const createCategory = (data) => {
   return (dispatch) => {
     return axios.post("/category", data)
       .then((res) => {
-        dispatch({ type: POST_CATEGORY, payload: res.data})
+        console.log('res createCat', res.data)
+        setTimeout(() =>  dispatch({ type: POST_CATEGORY, payload: res.data}), 777)
       })
       .catch(err => console.log(err));
   }

@@ -6,12 +6,19 @@ import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions } from "@mui/material";
 import { useNavigate } from "react-router";
 import { deleteArticle } from "../../store/actions/ArticlesActions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { TextField } from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
+import Placeholder from "../../assets/images/Placeholder.svg";
+import CardHeader from "@mui/material/CardHeader";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Avatar from "@mui/material/Avatar";
+// import AvatarIcon from '../../assets/images/Avatar.svg'
+import { ReactComponent as AvatarIcon } from "../../assets/images/Avatar.svg";
+import { Box } from "@mui/system";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -46,31 +53,63 @@ const CardArticle = (props) => {
   };
 
   return (
-    <Card key={data._id} sx={{ maxWidth: 345, minWidth: 275 }}>
-      <CardActionArea>
-        <CardContent onClick={() => navigate(`/Category/${data.name}`, { state: { category: data }})}>
-          <Typography gutterBottom variant="h5" component="div">
-            {data.name}
-          </Typography>
-          <Typography variant="h5">{data.icon}</Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
+    <Card sx={{ p: 1, m: 1, minWidth: "320" }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image={Placeholder}
+        alt="green iguana"
+      />
+      <CardHeader
+        avatar={<AvatarIcon />}
+        action={
+          <Box sx={{ display: 'flex', alignSelf: 'center' }}>
+            <ExpandMore
+              sx={{ color: "#1CD6C1" }}
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </Box>
+        }
+        title={
+          <CardActionArea>
+            <CardContent
+              onClick={() =>
+                navigate(`/Category/${data.name}`, {
+                  state: { category: data },
+                })
+              }
+            >
+              <Typography gutterBottom variant="h5" component="div">
+                {data.name}
+              </Typography>
+              <Typography gutterBottom variant="body" component="div">
+                MAR 13 2020
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        }
+      />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ mx: { md: 2, sm: 0 } }}>
           {data.articles_id.map((article, index) => (
-            <Typography key={index} gutterBottom variant="h5" component="div" onClick={e => navigate(`/Article/${article.title}`, { state: { article: article }})}>
-              {index +1} | {article.title}: {article.subtitle}
-            </Typography>
+            <CardActionArea key={index}>
+              <CardContent
+                onClick={() =>
+                  navigate(`/Article/${article.title}`, {
+                    state: { article: article },
+                  })
+                }
+              >
+                <Typography gutterBottom variant="h5" component="div">
+                  {index + 1} | {article.title}: {article.subtitle}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
           ))}
         </CardContent>
       </Collapse>
