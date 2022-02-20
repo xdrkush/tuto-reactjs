@@ -1,19 +1,49 @@
-import { CardMedia, Typography } from "@mui/material";
+import { Button, CardMedia, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { editArticle, getArticles } from "../store/actions/ArticlesActions";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import Placeholder from "../assets/images/Placeholder.svg";
-import Editor from "../components/admin/Editor"
+import Editor from "../components/admin/Editor";
+import { useDispatch, useSelector } from "react-redux";
 
 const ArticleIDPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  const [data, setData] = useState(state.article);
+  const [form, setForm] = useState(state.article);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const submitForm = () => {
+    console.log("submitform", form);
+    dispatch(editArticle(form));
+    setTimeout(() => dispatch(getArticles()), 777);
+  };
+
+  const handleData = (value) => {
+    setData({ ...data, description: value });
+    setForm({ ...form, description: value });
+  };
+
+  // Change state Form
+  const handleChange = (prop) => (event) => {
+    // console.log("handleInput", prop, event.target.value);
+    setForm({ ...form, [prop]: event.target.value });
+    setData({ ...data, [prop]: event.target.value });
+  };
+
+  useEffect(() => {
+    setData(state.article);
+    setForm(state.article);
+  }, [state]);
 
   useEffect(() => {
     if (!state) navigate(-1);
   }, [navigate, state]);
-
-  // console.log("state", state);
 
   return (
     <Box>
@@ -35,7 +65,7 @@ const ArticleIDPage = () => {
             fontSize: "38px",
           }}
         >
-          {state && state.article.title}
+          {data && data.title}
         </Typography>
         <Box
           sx={{
@@ -51,18 +81,42 @@ const ArticleIDPage = () => {
           variant="h5"
           sx={{
             zIndex: "5",
-            my: 2
+            my: 2,
           }}
         >
-          {state && state.article.subtitle}
+          {data && data.subtitle}
         </Typography>
       </Box>
-      <Box sx={{ my: 5 }}>
-        <Typography variant="body">
-          {state && state.article.description}
-        </Typography>
-        <Editor/>
+
+      <Box sx={{ my: 5, p: 2, display: "flex", flexDirection: "column" }}>
+        <Box>
+          <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+        </Box>
       </Box>
+      {auth.isAdmin === true && (
+        <Box sx={{ my: 5, p: 2, display: "flex", flexDirection: 'row-reverse', width: '100%'}}>
+          <Button onClick={() => setIsEdit((isEdit) ? false : true)} variant="contained">Edit</Button>
+          {isEdit === true && (
+            <Box sx={{ width: '100%'}}>
+              <TextField
+                sx={{width: '30%', py: 2}}
+                value={form[`title`]}
+                onChange={handleChange(`title`)}
+                label={"Title"}
+              />
+              <TextField
+                sx={{width: '70%', py: 2}}
+                value={form[`subtitle`]}
+                onChange={handleChange(`subtitle`)}
+                label={"Subtitle"}
+              />
+              {/* Wysiwyg */}
+              <Editor data={form.description} handleData={handleData} />
+              <Button onClick={() => submitForm(form)} variant="contained">Submit</Button>
+            </Box>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

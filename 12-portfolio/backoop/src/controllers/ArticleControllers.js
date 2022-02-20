@@ -85,12 +85,12 @@ class ArticleControllers extends Connection {
 
   async editOne(req, res) {
     try {
-      // console.log("put", req.params, req.body);
+      console.log("put", req.params, req.body);
       const { category_id, title, subtitle, description } = req.body;
       let article = await Article.findById(req.params.id);
       let oldCategory = await Category.findById(article.category_id.toString().replace(/ObjectId\("(.*)"\)/, "$1"));
       let category;
-      if (category_id) category = await Category.findOne({ name: category_id });
+      if (category_id) category = await Category.findById( category_id );
       if (category_id === "") category = oldCategory;
       if (oldCategory === null) oldCategory = await Category.findOne({name: req.body.category_id})
 

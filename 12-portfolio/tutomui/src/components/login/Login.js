@@ -50,7 +50,7 @@ const Login = () => {
         variant="standard"
       />
 
-      <Button onClick={handleForm}>Submit</Button>
+      <Button onClick={handleForm} variant="contained">Submit</Button>
     </Box>
   );
 };

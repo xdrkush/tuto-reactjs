@@ -86,7 +86,7 @@ export default function FormModule(props) {
         if (key === "id" || key === "_id" || key === "__v") return;
         if (key === "author_id") return;
         if (key === "articles_id") return;
-        else if (key === "isVerified" || key ===  "isAdmin" || key ===  "isBan")
+        else if (key === "isVerified" || key === "isAdmin" || key === "isBan")
           return (
             <SwitchChecked
               key={index}
@@ -103,12 +103,13 @@ export default function FormModule(props) {
                 sx={{ width: "100%" }}
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
+                defaultValue={form[`_id`]}
                 value={form[`${key}`]}
                 onChange={handleChange(`${key}`)}
                 label={key}
               >
                 {category.map((cat, index) => (
-                  <MenuItem key={"m" + index} value={cat.name}>
+                  <MenuItem key={"m" + index} value={cat._id}>
                     {cat.name}: {cat.icon}
                   </MenuItem>
                 ))}

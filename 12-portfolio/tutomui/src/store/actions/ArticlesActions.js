@@ -62,6 +62,7 @@ export const deleteArticle = (id) => {
 
 // Edit Article
 export const editArticle = (data) => {
+  console.log('store article action', data)
   return (dispatch) => {
     return axios.put(`/article/${ data._id }`, data)
       .then((res) => {

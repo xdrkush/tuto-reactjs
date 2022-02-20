@@ -237,6 +237,7 @@ function SimpleDialog(props) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={cat.name} />
+            <ListItemText primary={cat.icon} />
           </ListItem>
         ))}
         <ListItem>
@@ -256,6 +257,7 @@ function SimpleDialog(props) {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={txt} />
+              <ListItemText primary={'url:' + ' /'+txt} />
             </ListItem>
           ))}
         <ListItem>
@@ -275,6 +277,7 @@ function SimpleDialog(props) {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={art.title} />
+              <ListItemText primary={'url:' + ' /Article/'+art.title} />
             </ListItem>
           ))}
       </List>
