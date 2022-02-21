@@ -43,7 +43,7 @@ class ArticleControllers extends Connection {
   async create(req, res) {
     try {
       const { title, description, subtitle, author_id, category_id } = req.body;
-      // console.log("req.body", req.body);
+      console.log("req.body", req.body);
       if (title && description) {
         const category = await Category.findOne({ name: category_id });
         // On définit la construction de notre article

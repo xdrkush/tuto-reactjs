@@ -222,7 +222,7 @@ function SimpleDialog(props) {
       </Search>
       <List sx={{ pt: 0, minHeight: "450px", maxHeight: "70vh" }}>
         <ListItem>
-          <Avatar sx={{ bgcolor: "#3A3149", color: "white" }}>
+          <Avatar sx={{ bgcolor: "#3A3149" }}>
             <strong> # </strong>
           </Avatar>
           <Typography sx={{ px: 2, color: "#1CD6C1" }}>
@@ -232,7 +232,7 @@ function SimpleDialog(props) {
         {filterListCategory.map((cat, index) => (
           <ListItem button onClick={() => toCategory(cat)} key={index}>
             <ListItemAvatar>
-              <Avatar sx={{ bgcolor: "#3A3149", color: "white" }}>
+              <Avatar sx={{ bgcolor: "#3A3149" }}>
                 <strong>#</strong>
               </Avatar>
             </ListItemAvatar>
@@ -241,7 +241,7 @@ function SimpleDialog(props) {
           </ListItem>
         ))}
         <ListItem>
-          <Avatar sx={{ bgcolor: "#3A3149", color: "white" }}>
+          <Avatar sx={{ bgcolor: "#3A3149" }}>
             <strong> @ </strong>
           </Avatar>
           <Typography sx={{ px: 2, color: "#1CD6C1" }}>
@@ -252,16 +252,16 @@ function SimpleDialog(props) {
           filterListPage.map((txt, index) => (
             <ListItem button onClick={() => toPage(txt)} key={index}>
               <ListItemAvatar>
-                <Avatar sx={{ bgcolor: "#3A3149", color: "white" }}>
+                <Avatar sx={{ bgcolor: "#3A3149" }}>
                   <strong> @ </strong>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={txt} />
-              <ListItemText primary={'url:' + ' /'+txt} />
+              <ListItemText primary={"url:" + " /" + txt} />
             </ListItem>
           ))}
         <ListItem>
-          <Avatar sx={{ bgcolor: "#3A3149", color: "white" }}>
+          <Avatar sx={{ bgcolor: "#3A3149" }}>
             <strong> ~ </strong>
           </Avatar>
           <Typography sx={{ px: 2, color: "#1CD6C1" }}>
@@ -272,12 +272,12 @@ function SimpleDialog(props) {
           filterListArticle.map((art, index) => (
             <ListItem button onClick={() => toArticle(art)} key={index}>
               <ListItemAvatar>
-                <Avatar sx={{ bgcolor: "#3A3149", color: "white" }}>
+                <Avatar sx={{ bgcolor: "#3A3149" }}>
                   <strong> ~ </strong>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={art.title} />
-              <ListItemText primary={'url:' + ' /Article/'+art.title} />
+              <ListItemText primary={"url:" + " /Article/" + art.title} />
             </ListItem>
           ))}
       </List>
@@ -365,9 +365,8 @@ const MainLayout = ({ children }) => {
 
   // handle what happens on key press
   const handleKeyPress = React.useCallback((event) => {
-    
     if (event.ctrlKey === true && event.key === ("k" || "K")) {
-      event.preventDefault()
+      event.preventDefault();
       console.log(`ctrl with K pressed: ${event.key}`);
       handleClickOpen();
     }
@@ -482,14 +481,16 @@ const MainLayout = ({ children }) => {
             {["Home", "About", "Contact", "Project", "Category"].map(
               (link, index) => (
                 <ListItem
-                  button
+                  button active
                   key={link}
                   onClick={() => navigate({ pathname: `/${link}` })}
                 >
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={link} />
+                  <ListItemAvatar>
+                    <Avatar sx={{ bgcolor: "#3A3149" }}>
+                      <strong> @ </strong>
+                    </Avatar>
+                  </ListItemAvatar>
+                  <Typography variant="h5" sx={{ fontSize: 20 }}>{link}</Typography>
                 </ListItem>
               )
             )}
@@ -500,7 +501,7 @@ const MainLayout = ({ children }) => {
                 key="/Auth"
                 onClick={() => navigate({ pathname: `/Auth` })}
               >
-                <ListItemText primary="Auth" />
+                <Typography variant="h5">Auth</Typography>
               </ListItem>
             )}
 
@@ -510,7 +511,7 @@ const MainLayout = ({ children }) => {
                 key="/Admin"
                 onClick={() => navigate({ pathname: `/Admin` })}
               >
-                <ListItemText primary="Admin" />
+                <Typography variant="h5">Admin</Typography>
               </ListItem>
             )}
 
@@ -526,7 +527,7 @@ const MainLayout = ({ children }) => {
 
             {auth.authenticate === true && (
               <ListItem button onClick={() => logout()}>
-                <ListItemText primary="LOGOUT" />
+                <Typography variant="h5">LOGOUT</Typography>
               </ListItem>
             )}
           </List>

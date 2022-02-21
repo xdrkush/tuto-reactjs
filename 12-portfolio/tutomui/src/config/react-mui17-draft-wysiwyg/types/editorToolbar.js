@@ -259,6 +259,7 @@ export const defaultToolbarControlsConfiguration = {
         colorsPerRow: 10,
         options: colors,
     },
+    blockCode: {},
     fontSize: {
         options: [
             'default',

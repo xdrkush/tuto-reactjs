@@ -5,9 +5,6 @@ import image2 from "../../assets/images/image2.jpeg";
 import image3 from "../../assets/images/image3.jpeg";
 import image4 from "../../assets/images/image4.jpeg";
 
-// import clsx from 'clsx';
-// import { makeStyles } from '@mui/styles';
-
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -15,21 +12,18 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import clsx from "clsx";
 import { makeStyles } from "@mui/styles";
 
-// import "../../assets/css/svg.css";
 import { Typography } from "@mui/material";
 
 const useStyles = makeStyles({
   root: {
     "&.root": {
-      height: 100,
+      height: "290px",
       width: "100%",
-      backgroundColor: "blue",
       borderRadius: 5,
     },
     "& .child": {
-      height: 100,
+      height: "290px",
       width: "100%",
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
     },
   },
 });
@@ -40,7 +34,7 @@ const HeaderHome = (props) => {
     { id: 1, img: image1, title: "Komodo" },
     { id: 2, img: image2, title: "Javascript" },
     { id: 3, img: image3, title: "React JS" },
-    { id: 4, img: image4, title: "Vue JS" }
+    { id: 4, img: image4, title: "Vue JS" },
   ];
 
   return (
@@ -85,9 +79,16 @@ const HeaderHome = (props) => {
           }}
         >
           L’ensemble de mes projets sont des projets de développement web
-          disponible sur <span variant='body'> <strong>Github</strong> </span>.
+          disponible sur{" "}
+          <span variant="body">
+            {" "}
+            <strong>Github</strong>{" "}
+          </span>
+          .
         </Typography>
-        <Box sx={{ backgroundColor: '#1CD6C1', height: '7px', width: "100%" }}/>
+        <Box
+          sx={{ backgroundColor: "#1CD6C1", height: "7px", width: "100%" }}
+        />
       </Box>
 
       <Box
@@ -101,22 +102,35 @@ const HeaderHome = (props) => {
       >
         <ImageList cols={2} gap={10} sx={{ width: "600px", height: "600px" }}>
           {arrayImg.map((item, index) => (
-            <ImageListItem
-              key={item.img}
-              cols={1}
-              rows={1}
-            >
-              <img
+            <ImageListItem key={item.img} cols={1} rows={1}>
+              <Box
                 className={clsx(classes.root, "root")}
-                src={`${item.img}`}
-                alt={item.title}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                className="child"
-                sx={{height: '100%'}}
-                title={"Projet " + (index + 1)  + ": " + item.title}
-              />
+                sx={{
+                  pt: 30,
+                  background: `linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%), url("${item.img}") rgba(0, 237, 211, 0.6)`,
+                  backgroundBlendMode: "normal, multiply, normal",
+                }}
+              >
+                {/* <img
+                  className={clsx("child")}
+                  src={`${item.img}`}
+                  alt={item.title}
+                  loading="lazy"
+                /> */}
+
+                <Typography
+                  className="title_header"
+                  variant="body"
+                  sx={{
+                    zIndex: "5",
+                    top: '100px',
+                    fontSize: "18px",
+                    textAlign: "center",
+                  }}
+                >
+                  {"Projet " + (index + 1) + ": " + item.title}
+                </Typography>
+              </Box>
             </ImageListItem>
           ))}
         </ImageList>

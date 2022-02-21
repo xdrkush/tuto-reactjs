@@ -9,10 +9,11 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import { useNavigate } from "react-router";
+import { Avatar, Divider, ListItemAvatar, Typography } from "@mui/material";
 
 const ItemCollapse = (props) => {
   const { category } = props;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [openList, setOpenList] = React.useState(false);
 
   const handleClick = () => {
@@ -21,19 +22,35 @@ const ItemCollapse = (props) => {
 
   return (
     <Box sx={{ p: 0, m: 0 }}>
-      <ListItemButton onClick={handleClick}>
-        <ListItemIcon onClick={() => navigate(`/Category/${category.name}`, { state: { category }})}>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary={category.name} />
+      <ListItemButton
+        onClick={handleClick}
+        sx={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <ListItemAvatar>
+          <Avatar sx={{ bgcolor: "#3A3149" }}>
+            <strong> # </strong>
+          </Avatar>
+        </ListItemAvatar>
+        <Typography variant="h6">{category.name}</Typography>
         {openList ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={openList} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div">
           {category.articles_id.map((art, index) => {
             return (
-              <ListItemButton key={index} sx={{ pl: 4 }} onClick={() => navigate(`/Article/${art.title}`, { state: { article: art }})}>
-                <ListItemText secondary={art.title} />
+              <ListItemButton
+                key={index}
+                sx={{ pl: 2, bgcolor: "#211525" }}
+                onClick={() =>
+                  navigate(`/Article/${art.title}`, { state: { article: art } })
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: "#3A3149" }}>
+                    <strong> ~ </strong>
+                  </Avatar>
+                </ListItemAvatar>
+                <Typography variant="body">{art.title}</Typography>
               </ListItemButton>
             );
           })}
