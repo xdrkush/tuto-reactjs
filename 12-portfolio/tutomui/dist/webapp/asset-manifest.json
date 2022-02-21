@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "./static/css/main.92ae1288.css",
+    "main.js": "./static/js/main.b21d37f4.js",
+    "static/js/787.7042d66f.chunk.js": "./static/js/787.7042d66f.chunk.js",
+    "static/media/Poppins-Bold.ttf": "./static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
+    "static/media/image1.jpeg": "./static/media/image1.0df1c207debd674d2396.jpeg",
+    "static/media/image3.jpeg": "./static/media/image3.8b12d7f44db1a7624477.jpeg",
+    "static/media/image2.jpeg": "./static/media/image2.70b833540c8009083a30.jpeg",
+    "static/media/image4.jpeg": "./static/media/image4.a35cf4d2d117147fd38e.jpeg",
+    "static/media/Perso.svg": "./static/media/Perso.f04134461ec65c776e688dea9b620d92.svg",
+    "static/media/Unicorn.svg": "./static/media/Unicorn.4b265c4d60a91e4f4ab03cb38253451a.svg",
+    "static/media/React.svg": "./static/media/React.537eec236264ec54d67b18e8bd18f844.svg",
+    "static/media/Node.svg": "./static/media/Node.50139a901e17009e3f0740f949e18cb8.svg",
+    "static/media/Mongo.svg": "./static/media/Mongo.957ef37bac9ece8ed9688feda80a3c91.svg",
+    "static/media/Macbook.svg": "./static/media/Macbook.9fade6a9fdf77eabb2cce592c96499bb.svg",
+    "static/media/Insta.svg": "./static/media/Insta.395748fa887f51e60a40f3a7b2742736.svg",
+    "static/media/Avatar.svg": "./static/media/Avatar.bbfc99ea77f63421458d7540becb2ed9.svg",
+    "static/media/Github.svg": "./static/media/Github.8c9cd4286b5a430db74047fa8e63b662.svg",
+    "static/media/Twitter.svg": "./static/media/Twitter.e59ad0a62625d194fe6371b5b4734393.svg",
+    "static/media/Placeholder.svg": "./static/media/Placeholder.fb7f5d2c12d20e6279d3e7d19b1373dd.svg",
+    "static/media/Email.svg": "./static/media/Email.311399d18ebb36360084e51d6f642c14.svg",
+    "static/media/Yt.svg": "./static/media/Yt.386e096e4e7e424cc5a1d18e6d879f10.svg",
+    "static/media/Linkedin.svg": "./static/media/Linkedin.14d173f88fc1ce2f136a02dd2b8180d1.svg",
+    "index.html": "./index.html",
+    "static/media/Fb.svg": "./static/media/Fb.32949867aeea19e67f5ff1f450451be1.svg",
+    "static/media/Carre.svg": "./static/media/Carre.5c6b7da10d172e1c75f18fe2f87f8f4a.svg",
+    "static/media/CarreSecondary.svg": "./static/media/CarreSecondary.c0d4ac91e88000b4a0a6d5ca8558c330.svg",
+    "static/media/Vue.svg": "./static/media/Vue.70f292f71667358e225be47f568e825d.svg",
+    "main.92ae1288.css.map": "./static/css/main.92ae1288.css.map",
+    "main.b21d37f4.js.map": "./static/js/main.b21d37f4.js.map",
+    "787.7042d66f.chunk.js.map": "./static/js/787.7042d66f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92ae1288.css",
+    "static/js/main.b21d37f4.js"
+  ]
+}

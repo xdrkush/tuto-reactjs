@@ -246,6 +246,10 @@ export const defaultToolbarControlsConfiguration = {
                 value: 'header-six',
                 text: LANG_PREFIX + 'controls.blockType.labels.header6',
             },
+            {
+                value: 'code-block',
+                text: LANG_PREFIX + 'controls.blockType.labels.code',
+            },
         ],
     },
     image: {
@@ -259,7 +263,6 @@ export const defaultToolbarControlsConfiguration = {
         colorsPerRow: 10,
         options: colors,
     },
-    blockCode: {},
     fontSize: {
         options: [
             'default',

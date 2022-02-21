@@ -1,6 +1,7 @@
 {
   "name": "tutomui",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -23,6 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "w:build": "cross-env BUILD_PATH='./dist/webapp' react-scripts build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1"
   }

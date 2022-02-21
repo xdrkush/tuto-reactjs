@@ -7,7 +7,6 @@ import image4 from "../../assets/images/image4.jpeg";
 
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 import clsx from "clsx";
 import { makeStyles } from "@mui/styles";
