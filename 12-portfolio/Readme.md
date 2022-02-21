@@ -1,2 +1,2 @@
-![](https://github.com/xdrkush/tuto-reactjs/blob/main/images/header.png)
-![](https://github.com/xdrkush/tuto-reactjs/blob/main/images/pageid.png)
+![](https://github.com/xdrkush/tuto-reactjs/blob/main/12-portfolio/images/header.png)
+![](https://github.com/xdrkush/tuto-reactjs/blob/main/12-portfolio/images/pageid.png)
