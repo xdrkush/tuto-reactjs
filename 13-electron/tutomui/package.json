@@ -1,0 +1,102 @@
+{
+  "name": "tutomui",
+  "displayName": "TutoArch",
+  "version": "0.1.0",
+  "author": {
+    "name": "hsuk",
+    "email": "hs@uk.com",
+    "url": "https://404notfound.com"
+  },
+  "description": "Ma super app",
+  "email": "drkush@gmail.com",
+  "license": "MIT",
+  "homepage": "./",
+  "main": "build/electron.js",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.3.0",
+    "@mui/lab": "^5.0.0-alpha.66",
+    "@mui/material": "^5.3.0",
+    "@mui/styles": "^5.4.2",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.25.0",
+    "concurrently": "^7.0.0",
+    "draft-js": "^0.11.7",
+    "jwt-decode": "^3.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "rimraf": "^3.0.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "w:build": "cross-env BUILD_PATH='./dist/webapp' react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "e:build": "chmod +x ./src-electron/build.sh && ./src-electron/build.sh && yarn build && sudo rm ./public/electron.js ./public/preload.js",
+    "e:start": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "e:dev": "concurrently -k \"BROWSER=none yarn start\" \"npm:electron\"",
+    "electron": "wait-on tcp:3000 && electron .",
+    "e:mac": "yarn e:build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "e:win": "yarn e:build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "e:linux": "yarn e:build && electron-builder -l -c.extraMetadata.main=build/electron.js"
+  },
+  "build": {
+    "appId": "tuto.folio.app",
+    "productName": "My Kusholio Electron React App",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "public",
+      "output": "dist/electron"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^17.1.0",
+    "electron-builder": "^22.14.13",
+    "electron-is-dev": "^2.0.0",
+    "electronmon": "^2.0.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "wait-on": "^6.0.1"
+  }
+}
