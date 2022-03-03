@@ -1,0 +1,77 @@
+version: '3.6'
+
+x-common-variables: &common-variables
+  MYSQL_DATABASE: tuto_react
+  MYSQL_USER: tuto
+  MYSQL_PASSWORD: tuto
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  mysql_db:
+    # env_file: ./.env
+    # networks:
+    #   - app-tier
+    image: mysql
+    container_name: mysql_container
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - "./config/setup.sql:/docker-entrypoint-initdb.d/setup.sql"
+    ports:
+      - 3306:3306
+    environment:
+      <<: *common-variables
+      MYSQL_HOST: localhost
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_HOST_IP: localhost
+
+  nginx:
+    depends_on:
+      - back
+      - tutomui
+    container_name: nginx_container
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "7777:80"
+    # networks:
+    #   - app-tier
+
+  back:
+    # env_file: ./.env
+    depends_on:
+      - mysql_db
+    container_name: back_container
+    build:
+      dockerfile: Dockerfile
+      context: "./backoop-sql"
+    volumes:
+      - /back/node_modules
+      - ./back:/app
+    environment:
+      <<: *common-variables
+      MYSQL_HOST_IP: mysql_db
+    # networks:
+    #   - app-tier
+
+  tutomui:
+    stdin_open: true
+    container_name: tutomui_container
+    build:
+      dockerfile: Dockerfile
+      context: ./tutomui
+    # networks:
+    #   - app-tier
+    volumes:
+      - /app/node_modules
+      - ./tutomui:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
