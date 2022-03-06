@@ -116,7 +116,7 @@ zipalign -v 4 ./app-release-unsigned.apk app-release.apk
 ```
 cp ./signApk.sh ./platforms/android/app/build/outputs/apk/release
 chmod +x ./signApk.sh
-./signApk.sh
+./signApk.sh app
 ```
 (create a password for your key > create signature > signed .apk)
 
