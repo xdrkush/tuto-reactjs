@@ -3,58 +3,57 @@ const Article = require("../models/ArticleModel");
 class ArticleControllers {
   async getAll(req, res) {
     try {
-      Article.getAll((err, data) => {
-        console.log("data res", data);
-        if (err) {
-          console.log("err", err),
-          res.status(500).send({
-            message: err.message || "Une erreur est survenue",
-          });
-        } else {
+      const newArticle = new Article({});
+      newArticle
+        .getAll()
+        .then((data) => {
           return res.send({
             method: req.method,
             status: "success",
             flash: "Create Article Success !",
             dbArticles: data,
           });
-        }
-      });
+        })
+        .catch((err) => {
+          throw err;
+        });
     } catch (error) {
       throw error;
     }
   }
 
   async create(req, res) {
-    console.log("controller create article", req.body);
+    const { title, price } = req.body;
     let newArticle = new Article({
-      title: String(req.body.title),
-      price: Number(req.body.price),
+      title: String(title),
+      price: Number(price),
     });
     try {
-      Article.create(newArticle, (err, data) => {
-        if (err) res.send(err);
-        return res.send({
-          method: req.method,
-          status: "success",
-          flash: "Create Article Success !",
-          dbArticles: data,
-        });
-      });
+      newArticle
+        .create()
+        .then((data) => {
+          return res.send({
+            method: req.method,
+            status: "success",
+            flash: "Create Article Success !",
+            dbArticles: data,
+          });
+        })
+        .catch((err) => console.log("error", err));
     } catch (error) {
       throw error;
     }
   }
 
   async editOne(req, res) {
-    console.log("controller create article", req.body);
+    const { title, price } = req.body;
     let articleObj = new Article({
       id: Number(req.params.id),
-      title: String(req.body.title),
-      price: Number(req.body.price),
+      title: String(title),
+      price: Number(price),
     });
     try {
-      Article.editOne(articleObj, (err, data) => {
-        if (err) res.send(err);
+      articleObj.editOne().then((data) => {
         return res.send({
           method: req.method,
           status: "success",
@@ -68,22 +67,17 @@ class ArticleControllers {
   }
 
   async getId(req, res) {
+    let articleObj = new Article({
+      id: Number(req.params.id),
+    });
     try {
-      Article.getById(String(req.params.id), (err, data) => {
-        console.log("dataid res", data);
-        if (err) {
-          console.log("err", err),
-          res.status(500).send({
-            message: err.message || "Une erreur est survenue",
-          });
-        } else {
-          return res.send({
-            method: req.method,
-            status: "success",
-            flash: "Create Article Success !",
-            dbArticles: data,
-          });
-        }
+      articleObj.getById().then((data) => {
+        return res.send({
+          method: req.method,
+          status: "success",
+          flash: "Create Article Success !",
+          dbArticles: data,
+        });
       });
     } catch (error) {
       throw error;
@@ -92,16 +86,16 @@ class ArticleControllers {
 
   async deleteOne(req, res) {
     try {
-      Article.deleteOne(req.params.id, (err, data) => {
-        if (err) res.send(err);
-        else {
-          return res.send({
-            method: req.method,
-            status: "success",
-            flash: "Create Article Success !",
-            dbArticles: data,
-          });
-        }
+      let articleObj = new Article({
+        id: Number(req.params.id),
+      });
+      articleObj.deleteOne().then((data) => {
+        return res.send({
+          method: req.method,
+          status: "success",
+          flash: "Create Article Success !",
+          dbArticles: data,
+        });
       });
     } catch (error) {
       throw error;
