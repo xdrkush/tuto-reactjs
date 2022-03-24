@@ -11,6 +11,7 @@ import CategoryID from "./pages/CategoryIDPage";
 import Contact from "./pages/ContactPage";
 import Project from "./pages/ProjectPage";
 import ArticleID from "./pages/ArticleIDPage";
+import ArticleIDGithub from "./pages/ArticleIDGithub";
 import Login from "./pages/LoginPage";
 import NotFound from "./pages/NotFoundPage";
 
@@ -24,7 +25,6 @@ import ACategory from "./pages/admin/AdminCategory";
 import AArticle from "./pages/admin/AdminArticle";
 import AUser from "./pages/admin/AdminUser";
 
-// checkUx()
 const AppRoutes = () => (
   <MainLayout>
     <Routes>
@@ -37,6 +37,7 @@ const AppRoutes = () => (
       <Route path="Project" exact element={<Project />} />
       <Route path="Login" exact element={<Login />} />
       <Route path="Article/:name" exact element={<ArticleID />} />
+      <Route path="ArticleGH/:name" exact element={<ArticleIDGithub />} />
     </Routes>
   </MainLayout>
 );

@@ -27,3 +27,7 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ID_USERS = "GET_ID_USERS";
 export const EDIT_USERS = "EDIT_USERS";
 export const DELETE_USERS = "DELETE_USERS";
+
+// Github
+export const GET_REPOS_DATA = "GET_REPOS_DATA";
+export const GET_REPO_DATA = "GET_REPO_DATA"

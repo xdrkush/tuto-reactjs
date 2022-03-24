@@ -12,6 +12,7 @@ import { ArticlesReducer } from "./reducers/ArticlesReducers";
 import { UsersReducer } from "./reducers/UsersReducers";
 import { CategoryReducer } from "./reducers/CategoryReducers";
 import { AuthReducer } from "./reducers/AuthReducers";
+import { GithubReducer } from "./reducers/GithubReducers";
 
 /*
  * All (Root) Reducers
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   articles: ArticlesReducer,
   category: CategoryReducer,
   users: UsersReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  github: GithubReducer
 });
 
 /*

@@ -1,4 +1,6 @@
 import * as React from "react";
+import ItemCollapse from "../components/core/ItemCollapse";
+import ItemGHCollapse from "../components/core/ItemGHCollapse";
 import {
   Avatar,
   Button,
@@ -36,7 +38,6 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ListItem from "@mui/material/ListItem";
-import ItemCollapse from "../components/core/ItemCollapse";
 import InputBase from "@mui/material/InputBase";
 
 const drawerWidth = 240;
@@ -299,6 +300,8 @@ const MainLayout = ({ children }) => {
 
   const categories = useSelector((state) => state.category.listCategory);
   const auth = useSelector((state) => state.auth);
+  const reposGH = useSelector((state) => state.github.repos);
+  console.log("reposGH", reposGH);
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -481,7 +484,8 @@ const MainLayout = ({ children }) => {
             {["Home", "About", "Contact", "Project", "Category"].map(
               (link, index) => (
                 <ListItem
-                  button active
+                  button
+                  active
                   key={link}
                   onClick={() => navigate({ pathname: `/${link}` })}
                 >
@@ -490,7 +494,9 @@ const MainLayout = ({ children }) => {
                       <strong> @ </strong>
                     </Avatar>
                   </ListItemAvatar>
-                  <Typography variant="h5" sx={{ fontSize: 20 }}>{link}</Typography>
+                  <Typography variant="h5" sx={{ fontSize: 20 }}>
+                    {link}
+                  </Typography>
                 </ListItem>
               )
             )}
@@ -537,6 +543,10 @@ const MainLayout = ({ children }) => {
               categories.map((category, index) => {
                 return <ItemCollapse key={index} category={category} />;
               })}
+          </List>
+          <Divider />
+          <List>
+            <ItemGHCollapse />
           </List>
         </Drawer>
         <Main open={open}>
