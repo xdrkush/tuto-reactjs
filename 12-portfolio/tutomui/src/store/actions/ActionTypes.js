@@ -30,4 +30,4 @@ export const DELETE_USERS = "DELETE_USERS";
 
 // Github
 export const GET_REPOS_DATA = "GET_REPOS_DATA";
-export const GET_REPO_DATA = "GET_REPO_DATA"
+export const GET_README_DATA = "GET_README_DATA"

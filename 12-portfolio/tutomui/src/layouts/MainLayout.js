@@ -374,7 +374,7 @@ const MainLayout = ({ children }, props) => {
                 </Avatar>
               </ListItemAvatar>
               <Typography variant="h5" sx={{ fontSize: 20 }}>
-                {link}
+                {link.toString()}
               </Typography>
             </ListItem>
           )
@@ -556,9 +556,9 @@ const MainLayout = ({ children }, props) => {
             variant="temporary"
             open={mobileOpen}
             onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true,
-            }}
+            // ModalProps={{
+            //   keepMounted: true,
+            // }}
             sx={{
               display: { xs: "block", sm: "block" },
               "& .MuiDrawer-paper": {

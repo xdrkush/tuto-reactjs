@@ -6,7 +6,13 @@ import axios from "axios";
 /*
  * Import types { ... }
  * ******************** */
-import { GET_REPOS_DATA, GET_REPO_DATA } from "./ActionTypes";
+import { GET_REPOS_DATA, GET_README_DATA } from "./ActionTypes";
+
+const userGH = {
+  name: "xdrkush",
+  branchDefault: 'main',
+  file: 'README.md'
+}
 
 /*
  * Actions
@@ -16,7 +22,7 @@ import { GET_REPOS_DATA, GET_REPO_DATA } from "./ActionTypes";
 export const getRepos = () => {
   return (dispatch) => {
     return axios
-      .get("https://api.github.com/users/xdrkush/repos")
+      .get(`https://api.github.com/users/${userGH.name}/repos`)
       .then((res) => {
         // console.log("github res", res.data);
         dispatch({ type: GET_REPOS_DATA, payload: res.data });
@@ -27,20 +33,14 @@ export const getRepos = () => {
 
 // Get Repo
 export const getRepo = (data) => {
-  console.log("get repo 1", data, data.owner.login, data.name)
+  console.log('get repo', data)
   return (dispatch) => {
-    console.log("get repo 2")
-    // return axios
-    //   .get({
-    //     url: `https://raw.githubusercontent.com/${data.owner.login}/${data.name}/main/README.md`,
-    //     method: "GET",
-    //     responseType: "blob",
-    //   })
-    //   .then((res) => {
-    //     console.log("res", res);
-    //     console.log("github repo res2", res.data);
-    //     dispatch({ type: GET_REPO_DATA, payload: res.data });
-    //   })
-    //   .catch((err) => console.log(err));
+    dispatch({ type: GET_README_DATA, payload: {} });
+    return axios
+      .get(`https://raw.githubusercontent.com/${userGH.name.toString()}/${data.name.toString()}/${userGH.branchDefault.toString()}/${userGH.file.toString()}`)
+      .then((res) => {
+        dispatch({ type: GET_README_DATA, payload: res.data });
+      })
+      .catch((err) => console.log(err));
   };
 };

@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { getRepo } from "../store/actions/GithubActions";
 import Link from "@mui/material/Link";
+import ReactMarkdown from "react-markdown";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import Placeholder from "../assets/images/Placeholder.svg";
@@ -16,19 +17,41 @@ const ArticleIDPage = () => {
   const [data, setData] = useState(state.repo);
   const repo = useSelector((state) => state.github.repo);
 
-  console.log('REPO', repo)
+  console.log("REPO", repo);
 
   useEffect(() => {
     setData(state.repo);
   }, [state]);
 
   useEffect(() => {
-    getRepo(state.repo);
-  }, [window.location.href]);
+    dispatch(getRepo(state.repo));
+  }, [state]);
+
+  useEffect(() => {}, [window.location.href]);
 
   useEffect(() => {
     if (!state) navigate(-1);
   }, [navigate, state]);
+
+  const LinkSource = () => {
+    return (
+      <Link href={data.html_url}>
+        <Typography
+          className="title_header"
+          variant="body"
+          sx={{
+            textAlign: 'center',
+            zIndex: "5",
+            color: "#1CD6C1",
+            width: "100%",
+            fontWeight: "bold",
+          }}
+        >
+          {data && `> Source: ${data.html_url} <`}
+        </Typography>
+      </Link>
+    );
+  };
 
   return (
     <Box sx={{ p: 0, m: 0 }}>
@@ -41,7 +64,7 @@ const ArticleIDPage = () => {
           justifyContent: "center",
           display: "flex",
           flexDirection: "column",
-          flexWrap: 'wrap'
+          flexWrap: "wrap",
         }}
       >
         <CardMedia
@@ -50,7 +73,15 @@ const ArticleIDPage = () => {
           image={Placeholder}
           alt="green iguana"
         />
-        <Box sx={{ width: "100vw", textAlign: "center", mt: 2, wordBreak: 'break-all', p:1 }}>
+        <Box
+          sx={{
+            width: "100vw",
+            textAlign: "center",
+            mt: 2,
+            wordBreak: "break-all",
+            p: 1,
+          }}
+        >
           <Typography
             className="title_header"
             variant="h4"
@@ -73,7 +104,30 @@ const ArticleIDPage = () => {
               width: "75px",
             }}
           />
-          <Link href={data.html_url}>
+          <LinkSource />
+        </Box>
+        {repo.length > 0 ? (
+          <Box
+            sx={{
+              width: { sx: "100%", sm: "75vw" },
+              textAlign: "left",
+              mx: "auto",
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              mt: 2,
+              wordBreak: "break-all",
+              p: 1,
+            }}
+          >
+            <Box>
+              <ReactMarkdown>{repo}</ReactMarkdown>
+            </Box>
+
+            <LinkSource />
+          </Box>
+        ) : (
+          <Box>
             <Typography
               className="title_header"
               variant="h5"
@@ -85,11 +139,12 @@ const ArticleIDPage = () => {
                 fontWeight: "bold",
               }}
             >
-              {/* {data && '> Link to repo GH <'} */}
-              {data && data.html_url}
+              README.md Non Disponible (source en dessous)
             </Typography>
-          </Link>
-        </Box>
+
+            <LinkSource />
+          </Box>
+        )}
       </Box>
     </Box>
   );

@@ -8,7 +8,7 @@ import * as Actions from "../actions/ActionTypes";
  * ******** */
 const initialState = {
   repos: [],
-  repo: {},
+  repo: "",
 };
 
 /*
@@ -19,9 +19,9 @@ export function GithubReducer(state = initialState, action) {
     default:
       return state;
     case Actions.GET_REPOS_DATA:
-      return { repos: action.payload };
-    case Actions.GET_REPO_DATA:
-      return { repo: action.payload };
+      return { ...state, repos: action.payload };
+    case Actions.GET_README_DATA:
+      return { ...state, repo: action.payload };
   }
 }
 
