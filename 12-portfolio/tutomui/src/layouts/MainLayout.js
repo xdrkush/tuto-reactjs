@@ -476,7 +476,7 @@ const MainLayout = ({ children }, props) => {
             zIndex: (theme) => theme.zIndex.drawer + 1,
           }}
         >
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between", ml: 1 }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
