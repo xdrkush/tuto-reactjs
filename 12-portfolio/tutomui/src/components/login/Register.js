@@ -28,9 +28,9 @@ const FormRegister = () => {
   };
 
   return (
-    <Box sx={{ mx: { md: 2, sm: 0 } }}>
+    <Box sx={{ width: "100vw", display: "flex", flexDirection: "column" }}>
       <TextField
-        style={{ minWidth: "70%" }}
+        style={{ maxWidth: "250px" }}
         onChange={(e) => setName(e.target.value)}
         autoFocus
         margin="dense"
@@ -41,7 +41,7 @@ const FormRegister = () => {
         variant="standard"
       />
       <TextField
-        style={{ minWidth: "70%" }}
+        style={{ maxWidth: "250px" }}
         onChange={(e) => setEmail(e.target.value)}
         autoFocus
         margin="dense"
@@ -52,7 +52,7 @@ const FormRegister = () => {
         variant="standard"
       />
       <TextField
-        style={{ minWidth: "70%" }}
+        style={{ maxWidth: "250px" }}
         onChange={(e) => setPassword(e.target.value)}
         autoFocus
         margin="dense"
@@ -63,7 +63,7 @@ const FormRegister = () => {
         variant="standard"
       />
       <TextField
-        style={{ minWidth: "70%" }}
+        style={{ maxWidth: "250px" }}
         onChange={(e) => setPasswordConfirm(e.target.value)}
         autoFocus
         margin="dense"
@@ -74,7 +74,13 @@ const FormRegister = () => {
         variant="standard"
       />
 
-      <Button onClick={handleForm} variant="contained">Submit</Button>
+      <Button
+        sx={{ maxWidth: "250px" }}
+        onClick={handleForm}
+        variant="contained"
+      >
+        Submit
+      </Button>
     </Box>
   );
 };

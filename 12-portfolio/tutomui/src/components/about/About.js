@@ -12,21 +12,36 @@ const AboutPage = (props) => {
     <Box
       sx={{
         minHeight: "80vh",
-        width: "100%",
+        width: "90vw",
         display: "flex",
         position: "relative",
-        flexDirection: 'row-reverse',
+        flexDirection: "row-reverse",
+        p: 2
       }}
     >
+      {/* Image */}
+      <Box
+        sx={{
+          zIndex: "0",
+          position: "absolute",
+          top: { sm: "10px", xs: "-170px" },
+          bottom: "0",
+          left: { xs: "10px", sm: "-300px" },
+        }}
+      >
+        <Perso width="95vw" />
+      </Box>
+
+      {/* Text */}
       <Box
         sx={{
           zIndex: "5",
-          width: "50%",
+          width: { xs: "10  0%", sm: "60%" },
+          maxWidth: "800px",
           textAlign: "left",
           display: "flex",
           flexDirection: "column",
-          p: "50px",
-          alignSelf: "center",
+          alignSelf: { sm: "center", xs: "end" },
         }}
       >
         <Typography
@@ -56,7 +71,7 @@ const AboutPage = (props) => {
           eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
           praesentium voluptatum."
         </Typography>
-        <Button sx={{ my: "15px", maxWidth: "150px" }} variant="contained">
+        <Button sx={{ my: "15px" }} variant="contained">
           Contained
         </Button>
         <Stack direction="row" spacing={2}>
@@ -64,19 +79,6 @@ const AboutPage = (props) => {
           <Twitter />
           <Linkedin />
         </Stack>
-      </Box>
-
-      <Box
-        sx={{
-          zIndex: "0",
-          position: "absolute",
-          top: "0",
-          bottom: "0",
-          left: "-200px",
-          p: "25px",
-        }}
-      >
-        <Perso className="unicorn" />
       </Box>
     </Box>
   );

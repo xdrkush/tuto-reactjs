@@ -12,8 +12,22 @@ import Stack from "@mui/material/Stack";
 
 const Footer = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <Box sx={{ width: "50%" }}>
+    <Box
+      sx={{
+        display: "flex",
+        px: 2,
+        flexDirection: { md: "row", xs: "column" },
+        justifyContent: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: { md: "50%", xs: "100%" },
+          textAlign: 'center',
+          my: 2,
+          justifyContent: { md: "start", xs: "center" },
+        }}
+      >
         <Typography
           className="title_header"
           variant="h4"
@@ -38,17 +52,37 @@ const Footer = () => {
           Copyright © Dr Kush - Tous droits réservés
         </Typography>
       </Box>
-      <Box sx={{ width: "50%", display: "flex", flexDirection: "column" }}>
-        <Box sx={{ width: "100%", display: "flex", justifyContent: "end" }}>
+
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          my: 2,
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: { md: "end", xs: "center" },
+          }}
+        >
           <Stack direction="row" spacing={2}>
             <Fb />
             <Twitter />
             <Linkedin />
-            <Yt/>
-            <Insta/>
+            <Yt />
+            <Insta />
           </Stack>
         </Box>
-        <Box sx={{ width: "100%", display: "flex", justifyContent: "end", my: 2 }}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: { md: "end", xs: "center" },
+          }}
+        >
           {["Documentation", "À propos", "Projets", "Contact"].map(
             (txt, index) => (
               <Box key={index} sx={{ px: 1 }}>
@@ -58,7 +92,7 @@ const Footer = () => {
                   sx={{
                     zIndex: "5",
                     fontWeight: "bold",
-                    fontSize: "12px",
+                    fontSize: "10px",
                   }}
                 >
                   {txt}

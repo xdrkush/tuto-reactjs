@@ -7,13 +7,11 @@ import { ReactComponent as Macbook } from "../../assets/images/Macbook.svg";
 // import "../../assets/css/svg.css";
 import { Typography } from "@mui/material";
 
-const HeaderHome = (props) => {
+export default function HeaderHome(props) {
   return (
     <Box
       sx={{
-        my: "100px",
-        py: "75px",
-        px: "50px",
+        p: 2, pt: 5,
         textAlign: "center",
         minHeight: "80vh",
         width: "100%",
@@ -60,7 +58,8 @@ const HeaderHome = (props) => {
         {/* Left */}
         <Box
           sx={{
-            width: "50%",zIndex: "5"
+            width: "50%",
+            zIndex: "5",
           }}
         >
           {/* Vue */}
@@ -68,7 +67,7 @@ const HeaderHome = (props) => {
             sx={{
               maxWidth: "230px",
               textAlign: "left",
-              p: "10px",
+              p: 1,
             }}
           >
             <Box>
@@ -104,7 +103,7 @@ const HeaderHome = (props) => {
             sx={{
               maxWidth: "230px",
               textAlign: "left",
-              p: "10px",
+              p: 1,
             }}
           >
             <Box>
@@ -152,7 +151,7 @@ const HeaderHome = (props) => {
             sx={{
               maxWidth: "230px",
               textAlign: "right",
-              p: "10px",
+              p: 1,
             }}
           >
             <Box>
@@ -188,7 +187,7 @@ const HeaderHome = (props) => {
             sx={{
               maxWidth: "230px",
               textAlign: "right",
-              p: "10px",
+              p: 1,
             }}
           >
             <Box>
@@ -226,7 +225,7 @@ const HeaderHome = (props) => {
       <Box
         sx={{
           maxWidth: "100%",
-          zIndex: '0',
+          zIndex: "0",
           position: "absolute",
           top: "35%",
           bottom: "0",
@@ -235,10 +234,8 @@ const HeaderHome = (props) => {
           mx: "auto",
         }}
       >
-        <Macbook className="unicorn" />
+        <Macbook width='95vw'/>
       </Box>
     </Box>
   );
-};
-
-export default HeaderHome;
+}

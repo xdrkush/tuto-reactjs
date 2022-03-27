@@ -1,15 +1,11 @@
 import React from "react";
-import ContactMe from '../components/contact/ContactMe'
-import { Grid } from "@mui/material";
+import ContactMe from "../components/contact/ContactMe";
+import { Box } from "@mui/system";
 
-const ContactPage = () => {
+export default function ContactPage () {
   return (
-    <Grid container columns={16}>
-      <Grid item xs={16}>
-        <ContactMe />
-      </Grid>
-    </Grid>
+    <Box sx={{ p: 0, m: 0 }}>
+      <ContactMe />
+    </Box>
   );
 };
-
-export default ContactPage;

@@ -19,7 +19,6 @@ const ArticleIDPage = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const submitForm = () => {
-    console.log("submitform", form);
     dispatch(editArticle(form));
     setTimeout(() => dispatch(getArticles()), 777);
   };
@@ -46,14 +45,21 @@ const ArticleIDPage = () => {
   }, [navigate, state]);
 
   return (
-    <Box>
+    <Box sx={{ p: 0, m: 0 }}>
       <CardMedia
         component="img"
         height="300"
         image={Placeholder}
         alt="green iguana"
       />
-      <Box sx={{ width: "100%", textAlign: "center", mt: 5 }}>
+      <Box
+        sx={{
+          width: "100vw",
+          textAlign: "center",
+          mt: 5,
+          wordBreak: "break-all",
+        }}
+      >
         <Typography
           className="title_header"
           variant="h4"
@@ -82,37 +88,61 @@ const ArticleIDPage = () => {
           sx={{
             zIndex: "5",
             my: 2,
+            fontSize: "22px",
           }}
         >
           {data && data.subtitle}
         </Typography>
       </Box>
 
-      <Box sx={{ my: 5, p: 2, display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          my: 5,
+          p: 2,
+          display: "flex",
+          flexDirection: "column",
+          wordBreak: "break-all",
+        }}
+      >
         <Box>
           <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
         </Box>
       </Box>
       {auth.isAdmin === true && (
-        <Box sx={{ my: 5, p: 2, display: "flex", flexDirection: 'row-reverse', width: '100%'}}>
-          <Button onClick={() => setIsEdit((isEdit) ? false : true)} variant="contained">Edit</Button>
+        <Box
+          sx={{
+            my: 5,
+            p: 2,
+            display: "flex",
+            flexDirection: "row-reverse",
+            width: "100%",
+          }}
+        >
+          <Button
+            onClick={() => setIsEdit(isEdit ? false : true)}
+            variant="contained"
+          >
+            Edit
+          </Button>
           {isEdit === true && (
-            <Box sx={{ width: '100%'}}>
+            <Box sx={{ width: "100%" }}>
               <TextField
-                sx={{width: '30%', py: 2}}
+                sx={{ width: "30%", py: 2 }}
                 value={form[`title`]}
                 onChange={handleChange(`title`)}
                 label={"Title"}
               />
               <TextField
-                sx={{width: '70%', py: 2}}
+                sx={{ width: "70%", py: 2 }}
                 value={form[`subtitle`]}
                 onChange={handleChange(`subtitle`)}
                 label={"Subtitle"}
               />
               {/* Wysiwyg */}
               <Editor data={form.description} handleData={handleData} />
-              <Button onClick={() => submitForm(form)} variant="contained">Submit</Button>
+              <Button onClick={() => submitForm(form)} variant="contained">
+                Submit
+              </Button>
             </Box>
           )}
         </Box>

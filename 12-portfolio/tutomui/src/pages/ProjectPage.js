@@ -1,14 +1,12 @@
 import React from "react";
-import MyProject from '../components/project/MyProject'
-import { Grid } from "@mui/material";
+import MyProject from "../components/project/MyProject";
+import { Box } from "@mui/system";
 
 const ProjectPage = () => {
   return (
-    <Grid container columns={16}>
-      <Grid item xs={16}>
-        <MyProject />
-      </Grid>
-    </Grid>
+    <Box sx={{ p: 0, m:0 }}>
+      <MyProject />
+    </Box>
   );
 };
 

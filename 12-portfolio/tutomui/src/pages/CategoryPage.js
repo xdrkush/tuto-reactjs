@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ListCard from "../components/category/ListCard";
 import Searchbar from "../components/category/Searchbar";
-import { Grid } from "@mui/material";
+import { Box } from "@mui/system";
 
 import { getCategory } from "../store/actions/CategoryActions";
 
@@ -23,14 +23,10 @@ const ArticlePage = () => {
   }, []);
 
   return (
-    <Grid container spacing={2} columns={16}>
-      <Grid item xs={16}>
-        <Searchbar handleSearch={handleSearch} />
-      </Grid>
-      <Grid item xs={16}>
-        <ListCard list={categories} search={search} />
-      </Grid>
-    </Grid>
+    <Box sx={{ p: 0, m: 0 }}>
+      <Searchbar handleSearch={handleSearch} />
+      <ListCard list={categories} search={search} />
+    </Box>
   );
 };
 

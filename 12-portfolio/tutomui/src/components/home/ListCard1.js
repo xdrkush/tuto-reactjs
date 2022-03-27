@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-const ListCard = (props) => {
+export default function ListCard (props) {
   const { list } = props;
   // const listCard = [
   //   {
@@ -76,5 +76,3 @@ const ListCard = (props) => {
     </Container>
   );
 };
-
-export default ListCard;

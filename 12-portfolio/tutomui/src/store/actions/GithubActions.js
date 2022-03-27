@@ -18,7 +18,7 @@ export const getRepos = () => {
     return axios
       .get("https://api.github.com/users/xdrkush/repos")
       .then((res) => {
-        console.log("github res", res.data);
+        // console.log("github res", res.data);
         dispatch({ type: GET_REPOS_DATA, payload: res.data });
       })
       .catch((err) => console.log(err));
@@ -27,14 +27,20 @@ export const getRepos = () => {
 
 // Get Repo
 export const getRepo = (data) => {
-  console.log("github repo res1", data.url);
+  console.log("get repo 1", data, data.owner.login, data.name)
   return (dispatch) => {
-    return axios
-      .get(data.url)
-      .then((res) => {
-        console.log("github repo res2", res.data);
-        dispatch({ type: GET_REPO_DATA, payload: res.data });
-      })
-      .catch((err) => console.log(err));
+    console.log("get repo 2")
+    // return axios
+    //   .get({
+    //     url: `https://raw.githubusercontent.com/${data.owner.login}/${data.name}/main/README.md`,
+    //     method: "GET",
+    //     responseType: "blob",
+    //   })
+    //   .then((res) => {
+    //     console.log("res", res);
+    //     console.log("github repo res2", res.data);
+    //     dispatch({ type: GET_REPO_DATA, payload: res.data });
+    //   })
+    //   .catch((err) => console.log(err));
   };
 };

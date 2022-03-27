@@ -17,7 +17,7 @@ const LoginPage = () => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ p: 0, m: 0 }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">

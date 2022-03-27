@@ -41,19 +41,21 @@ const HeaderHome = (props) => {
       sx={{
         textAlign: "center",
         minHeight: "auto",
-        width: "100%",
+        width: "100vw",
         justifyContent: "center",
         display: "flex",
+        flexDirection: {sm: 'row', xs: 'column'},
+        p: 2
       }}
     >
       <Box
         sx={{
-          maxWidth: "520px",
+          maxWidth: {sm: "40%", xs: "100%"},
           textAlign: "left",
           display: "flex",
           flexDirection: "column",
           alignSelf: "center",
-          p: "50px",
+          p: 1
         }}
       >
         <Typography
@@ -63,7 +65,7 @@ const HeaderHome = (props) => {
             color: "primary",
             zIndex: "5",
             fontWeight: "bold",
-            fontSize: "54px",
+            fontSize: "35px",
           }}
         >
           Jettez un oeil à mes projets Copy
@@ -95,7 +97,7 @@ const HeaderHome = (props) => {
           display: "flex",
           pt: "5%",
           justifyContent: "center",
-          maxWidth: "60%",
+          maxWidth: {sm: "60%", xs: "100%"},
           height: "80vh",
         }}
       >
@@ -127,7 +129,7 @@ const HeaderHome = (props) => {
                     textAlign: "center",
                   }}
                 >
-                  {"Projet " + (index + 1) + ": " + item.title}
+                  {`${index + 1}: ${item.title}`}
                 </Typography>
               </Box>
             </ImageListItem>

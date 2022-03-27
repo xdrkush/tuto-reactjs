@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 import { Avatar, Divider, ListItemAvatar, Typography } from "@mui/material";
 
 const ItemCollapse = (props) => {
-  const { category } = props;
+  const { category, closeDrawer } = props;
   const navigate = useNavigate();
   const [openList, setOpenList] = React.useState(false);
 
@@ -41,9 +41,12 @@ const ItemCollapse = (props) => {
               <ListItemButton
                 key={index}
                 sx={{ pl: 2, bgcolor: "#211525" }}
-                onClick={() =>
-                  navigate(`/Article/${art.title}`, { state: { article: art } })
-                }
+                onClick={() => {
+                  closeDrawer(false);
+                  navigate(`/Article/${art.title}`, {
+                    state: { article: art },
+                  });
+                }}
               >
                 <ListItemAvatar>
                   <Avatar sx={{ bgcolor: "#3A3149" }}>

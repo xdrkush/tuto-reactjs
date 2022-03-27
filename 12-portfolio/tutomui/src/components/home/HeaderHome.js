@@ -11,7 +11,7 @@ import { ReactComponent as Insta } from "../../assets/images/Insta.svg";
 
 import Stack from "@mui/material/Stack";
 
-const HeaderHome = (props) => {
+export default function HeaderHome(props) {
   const navigate = useNavigate();
   return (
     <Box
@@ -19,7 +19,7 @@ const HeaderHome = (props) => {
         textAlign: "center",
         position: "relative",
         minHeight: "80vh",
-        width: "100%",
+        p: 2,
       }}
     >
       <Typography
@@ -30,7 +30,7 @@ const HeaderHome = (props) => {
           fontSize: "60px",
           zIndex: "5",
           position: "relative",
-          top: "100px",
+          top: "80px",
         }}
       >
         Kusholio
@@ -40,49 +40,40 @@ const HeaderHome = (props) => {
         variant="h2"
         sx={{
           zIndex: "5",
-          fontSize: "60px",
+          fontSize: "35px",
           position: "relative",
           top: "100px",
         }}
       >
-        Développeur-Web
+        Dev Web
       </Typography>
       <Typography
         className="title_header"
         variant="h3"
         sx={{
           zIndex: "5",
-          fontSize: "60px",
+          fontSize: "30px",
           position: "relative",
-          top: "100px",
+          top: "130px",
         }}
       >
         Open-source Maniac
       </Typography>
+      <Box sx={{ position: "absolute", top: {sm: "40px", xs: "0px"}, zIndex: "-1" }}>
+        <Unicorn width="95vw" />
+      </Box>
+      {/* <Unicorn width="90vw" /> */}
       <Box
         sx={{
-          zIndex: "0",
-          position: "absolute",
-          top: "0",
-          bottom: "0",
-          left: "0",
-          right: "0",
-          mx: "auto",
-          p: "25px",
+          width: "100%",
+          display: "flex",
+          height: "auto",
+          justifyContent: "space-between",
+          pt: "150px",
+          zIndex: "5",
         }}
       >
-        <Unicorn className="unicorn" />
-      </Box>
-      <Box
-        sx={{ width: "100%", display: "flex", height: 'auto', justifyContent: "space-between", pt: '20%' }}
-      >
-        <Stack
-          direction="column"
-          spacing={2}
-          sx={{
-            top: "80vh",
-          }}
-        >
+        <Stack direction="column" spacing={2}>
           <Fb />
           <Twitter />
           <Linkedin />
@@ -90,9 +81,7 @@ const HeaderHome = (props) => {
           <Insta />
         </Stack>
       </Box>
-      <Box
-        sx={{ width: "100%", display: "flex", justifyContent: "end" }}
-      >
+      <Box sx={{ width: "100%", display: "flex", justifyContent: "end" }}>
         <Button
           sx={{
             zIndex: "5",
@@ -106,6 +95,4 @@ const HeaderHome = (props) => {
       </Box>
     </Box>
   );
-};
-
-export default HeaderHome;
+}

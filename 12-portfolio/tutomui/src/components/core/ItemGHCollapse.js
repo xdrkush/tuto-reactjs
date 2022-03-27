@@ -13,11 +13,12 @@ import { Avatar, Divider, ListItemAvatar, Typography } from "@mui/material";
 import { getRepos } from "../../store/actions/GithubActions";
 import { useDispatch, useSelector } from "react-redux";
 
-const ItemGHCollapse = () => {
+const ItemGHCollapse = (props) => {
+  const { closeDrawer } = props;
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [openList, setOpenList] = React.useState(false);
-  const reposGH = useSelector(state => state.github.repos)
+  const reposGH = useSelector((state) => state.github.repos);
 
   const handleClick = () => {
     setOpenList(!openList);
@@ -26,7 +27,6 @@ const ItemGHCollapse = () => {
   React.useEffect(() => {
     dispatch(getRepos());
   }, []);
-
 
   return (
     <Box sx={{ p: 0, m: 0 }}>
@@ -49,9 +49,10 @@ const ItemGHCollapse = () => {
               <ListItemButton
                 key={index}
                 sx={{ pl: 2, bgcolor: "#211525" }}
-                onClick={() =>
-                  navigate(`/ArticleGH/${repo.name}`, { state: { repo } })
-                }
+                onClick={() => {
+                  closeDrawer(false);
+                  navigate(`/ArticleGH/${repo.name}`, { state: { repo } });
+                }}
               >
                 <ListItemAvatar>
                   <Avatar sx={{ bgcolor: "#3A3149" }}>

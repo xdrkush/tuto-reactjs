@@ -16,6 +16,8 @@ const ArticleIDPage = () => {
   const [data, setData] = useState(state.repo);
   const repo = useSelector((state) => state.github.repo);
 
+  console.log('REPO', repo)
+
   useEffect(() => {
     setData(state.repo);
   }, [state]);
@@ -28,82 +30,67 @@ const ArticleIDPage = () => {
     if (!state) navigate(-1);
   }, [navigate, state]);
 
-  console.log("Article GH ID", data, repo);
-
   return (
-    <Box>
-      <CardMedia
-        component="img"
-        height="300"
-        image={Placeholder}
-        alt="green iguana"
-      />
-      <Box sx={{ width: "100%", textAlign: "center", mt: 5 }}>
-        <Typography
-          className="title_header"
-          variant="h4"
-          sx={{
-            color: "primary",
-            my: 2,
-            zIndex: "5",
-            fontWeight: "bold",
-            fontSize: "38px",
-          }}
-        >
-          {data && data.name}
-        </Typography>
-        <Box
-          sx={{
-            backgroundColor: "#1CD6C1",
-            height: "4px",
-            my: 5,
-            m: "auto",
-            width: "75px",
-          }}
+    <Box sx={{ p: 0, m: 0 }}>
+      <Box
+        sx={{
+          textAlign: "center",
+          minHeight: "auto",
+          width: "100vw",
+          maxWidth: "100vw",
+          justifyContent: "center",
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: 'wrap'
+        }}
+      >
+        <CardMedia
+          component="img"
+          height="300"
+          image={Placeholder}
+          alt="green iguana"
         />
-        <Link href={data.html_url}>
+        <Box sx={{ width: "100vw", textAlign: "center", mt: 2, wordBreak: 'break-all', p:1 }}>
           <Typography
             className="title_header"
-            variant="h5"
+            variant="h4"
             sx={{
-              zIndex: "5",
+              color: "primary",
               my: 2,
-              color: 'white'
+              zIndex: "5",
+              fontWeight: "bold",
+              fontSize: "38px",
             }}
           >
-            {data && data.html_url}
+            {data && data.name}
           </Typography>
-        </Link>
+          <Box
+            sx={{
+              backgroundColor: "#1CD6C1",
+              height: "4px",
+              my: 5,
+              m: "auto",
+              width: "75px",
+            }}
+          />
+          <Link href={data.html_url}>
+            <Typography
+              className="title_header"
+              variant="h5"
+              sx={{
+                zIndex: "5",
+                my: 2,
+                color: "white",
+                maxWidth: "100%",
+                fontWeight: "bold",
+              }}
+            >
+              {/* {data && '> Link to repo GH <'} */}
+              {data && data.html_url}
+            </Typography>
+          </Link>
+        </Box>
       </Box>
-
-      {/* <Box sx={{ my: 5, p: 2, display: "flex", flexDirection: "column" }}>
-        <Box>
-          <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
-        </Box>
-      </Box> */}
-      {/* {auth.isAdmin === true && (
-        <Box sx={{ my: 5, p: 2, display: "flex", flexDirection: 'row-reverse', width: '100%'}}>
-          <Button onClick={() => setIsEdit((isEdit) ? false : true)} variant="contained">Edit</Button>
-          {isEdit === true && (
-            <Box sx={{ width: '100%'}}>
-              <TextField
-                sx={{width: '30%', py: 2}}
-                value={form[`title`]}
-                onChange={handleChange(`title`)}
-                label={"Title"}
-              />
-              <TextField
-                sx={{width: '70%', py: 2}}
-                value={form[`subtitle`]}
-                onChange={handleChange(`subtitle`)}
-                label={"Subtitle"}
-              />
-              <Editor data={form.description} handleData={handleData} />
-              <Button onClick={() => submitForm(form)} variant="contained">Submit</Button>
-            </Box>
-          )}
-        </Box>
-      )} */}
     </Box>
   );
 };

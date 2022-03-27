@@ -1,33 +1,32 @@
 import { Box } from "@mui/system";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 // import "../../assets/css/svg.css";
 import { Typography } from "@mui/material";
 
-const HeaderHome = (props) => {
+export default function HeaderHome(props) {
   return (
     <Box
       sx={{
-        my: "100px",
-        py: "75px",
-        px: "25px",
+        my: 5,
+        py: 2,
         textAlign: "center",
-        minHeight: "80vh",
         width: "100%",
         position: "relative",
         backgroundColor: "#2F1F34",
+        display: "flex",
+        alignItems: "center",
       }}
     >
       {/* Title & subtitle */}
       <Box
         sx={{
+          p: 1,
           zIndex: "5",
+          width: '90%',
           top: "200px",
-          py: "50px",
-          px: "25px",
           margin: "auto",
           textAlign: "left",
-          mb: "50px",
           backgroundColor: "#211525",
         }}
       >
@@ -40,7 +39,7 @@ const HeaderHome = (props) => {
             m: "0",
             p: "0",
             fontWeight: "bold",
-            fontSize: "60px",
+            fontSize: "40px",
           }}
         >
           Un projet ?
@@ -54,16 +53,13 @@ const HeaderHome = (props) => {
             m: "0",
             p: "0",
             fontWeight: "bold",
-            fontSize: "60px",
+            fontSize: "28px",
           }}
         >
           Envie d’apprendre ?
         </Typography>
         <Button variant="contained">Contained</Button>
-
       </Box>
     </Box>
   );
-};
-
-export default HeaderHome;
+}

@@ -6,17 +6,13 @@ import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router";
-import { deleteArticle } from "../../store/actions/ArticlesActions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import CardMedia from "@mui/material/CardMedia";
 import Placeholder from "../../assets/images/Placeholder.svg";
 import CardHeader from "@mui/material/CardHeader";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Avatar from "@mui/material/Avatar";
-// import AvatarIcon from '../../assets/images/Avatar.svg'
 import { ReactComponent as AvatarIcon } from "../../assets/images/Avatar.svg";
 import { Box } from "@mui/system";
 
@@ -34,26 +30,19 @@ const ExpandMore = styled((props) => {
 const CardArticle = (props) => {
   const { data } = props;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const handleDelete = async (id) => dispatch(deleteArticle(id));
-  const toArticleID = async (article) =>
-    navigate("/Article/" + article.title, { state: { article } });
-
-  const handleForm = async (e) => {
-    e.preventDefault();
-    // console.log("Form:", { id: data.id });
-    await dispatch(editArticle({ id: data.id }));
-    await dispatch(getArticles());
-  };
-
   return (
-    <Card sx={{ maxWidth: {xs: "100%", sm: '370px'}, minWidth: {xs: '300px', sm: '370px'} }}>
+    <Card
+      sx={{
+        maxWidth: { xs: "100%", sm: "370px" },
+        minWidth: { xs: "300px", sm: "370px" },
+      }}
+    >
       <CardMedia
         component="img"
         height="140"
@@ -63,7 +52,7 @@ const CardArticle = (props) => {
       <CardHeader
         avatar={<AvatarIcon />}
         action={
-          <Box sx={{ display: 'flex', alignSelf: 'center' }}>
+          <Box sx={{ display: "flex", alignSelf: "center" }}>
             <ExpandMore
               sx={{ color: "#1CD6C1" }}
               expand={expanded}
@@ -79,16 +68,19 @@ const CardArticle = (props) => {
           <CardActionArea>
             <CardContent
               onClick={() =>
-                navigate(`/Category/${data.name}`, {
-                  state: { category: data },
+                navigate(`/Category/Github`, {
+                  state: { category: {
+                    name: "Github",
+                    articles_id: data
+                  } },
                 })
               }
             >
               <Typography gutterBottom variant="h5" component="div">
-                {data.name}
+                Github
               </Typography>
               <Typography gutterBottom variant="body" component="div">
-                MAR 13 2022
+                MAR 13 2020
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -96,17 +88,17 @@ const CardArticle = (props) => {
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ mx: { md: 2, sm: 0 } }}>
-          {data.articles_id.map((article, index) => (
+          {data.map((article, index) => (
             <CardActionArea key={index}>
               <CardContent
                 onClick={() =>
-                  navigate(`/Article/${article.title}`, {
-                    state: { article: article },
+                  navigate(`/ArticleGH/${article.name}`, {
+                    state: { repo: article },
                   })
                 }
               >
                 <Typography gutterBottom variant="body" component="div">
-                  {index + 1} | {article.title}: {article.subtitle}
+                  {index + 1} | {article.name}
                 </Typography>
               </CardContent>
             </CardActionArea>

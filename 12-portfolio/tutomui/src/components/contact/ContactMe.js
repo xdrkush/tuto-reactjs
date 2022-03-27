@@ -14,20 +14,22 @@ const HeaderHome = (props) => {
       sx={{
         textAlign: "center",
         minHeight: "auto",
-        width: "100%",
+        width: "100vw",
         justifyContent: "center",
-        pt: '100px',
+        pt: {xs: "50px", sm: "100px"},
         display: "flex",
+        flexDirection: { sm: "row", xs: "column" },
       }}
     >
+      {/* Text */}
       <Box
         sx={{
-          maxWidth: "50%",
+          maxWidth: {sm: "50%", xs: "100%"},
           textAlign: "left",
           display: "flex",
           flexDirection: "column",
           alignSelf: "center",
-          p: "50px",
+          p: 2
         }}
       >
         <Typography
@@ -147,14 +149,15 @@ const HeaderHome = (props) => {
         </Box>
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", maxWidth: "50%" }}>
+      {/* Form */}
+      <Box sx={{ display: "flex", justifyContent: "center", maxWidth: {sm: "50%", xs: "100%"} }}>
         <Box
           sx={{
             textAlign: "left",
             width: "100%",
             alignItems: "center",
-            alignSelf: 'center',
-            p: "25px",
+            alignSelf: "center",
+            p:2,
             backgroundColor: "#2F1F34",
           }}
         >
@@ -168,7 +171,7 @@ const HeaderHome = (props) => {
             <TextField
               fullWidth
               id="standard-basic"
-              placeholder='Name'
+              placeholder="Name"
               label="Name"
               variant="standard"
             />
@@ -183,7 +186,7 @@ const HeaderHome = (props) => {
             <TextField
               fullWidth
               id="standard-basic"
-              placeholder='Email'
+              placeholder="Email"
               label="Email"
               variant="standard"
             />
@@ -198,7 +201,7 @@ const HeaderHome = (props) => {
             <TextField
               fullWidth
               id="standard-basic"
-              placeholder='Object'
+              placeholder="Object"
               label="Objet"
               variant="standard"
             />
@@ -213,14 +216,14 @@ const HeaderHome = (props) => {
             <TextField
               fullWidth
               id="standard-basic"
-              placeholder='Message'
+              placeholder="Message"
               label="Message"
               variant="standard"
             />
           </Box>
-          <Button sx={{ my: "15px", width: '100%'}} variant="contained">
-          Contained
-        </Button>
+          <Button sx={{ my: "15px", width: "100%" }} variant="contained">
+            Contained
+          </Button>
         </Box>
         <Box
           sx={{ textAlign: "left", width: "100%", alignSelf: "center" }}

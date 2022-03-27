@@ -14,17 +14,17 @@ const CategoryIDPage = () => {
     if (!state) navigate("/Category");
   }, [navigate, state]);
 
-  // console.log("state ici", state);
+  console.log("state ici", state);
 
   return (
-    <Box>
+    <Box sx={{p:0, m:0}}>
       <CardMedia
         component="img"
         height="300"
         image={Placeholder}
         alt="green iguana"
       />
-      <Box sx={{ width: "100%", textAlign: "center", mt: 5 }}>
+      <Box sx={{ width: "100vw", textAlign: "center", mt: 5 }}>
         <Typography
           className="title_header"
           variant="h4"
@@ -36,7 +36,7 @@ const CategoryIDPage = () => {
             fontSize: "38px",
           }}
         >
-          {state && state.category.name} : {state && state.category.icon}
+          {state && state.category.name}
         </Typography>
         <Box
           sx={{

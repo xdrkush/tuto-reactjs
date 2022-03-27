@@ -29,7 +29,7 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
+  marginRight: 0,
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
@@ -101,27 +101,32 @@ export default function PrimarySearchAppBar(props) {
       sx={{
         textAlign: "left",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: {xs: "column", sm: "row"},
         alignSelf: "center",
-        p: "50px",
+        width: '100vw',
+        maxWidth: '100vw',
+        p:2
       }}
     >
+      {/* Decoration + Text */}
       <Box
         sx={{
           textAlign: "left",
-          py: "50px",
+          pt: "0px",
           display: "flex",
         }}
       >
         <Box
           sx={{
             backgroundColor: "#1CD6C1",
+            position: 'relative',
+            top: '20px',
             height: "4px",
-            mx: 3,
-            my: "40px",
             width: "75px",
+            mx: 2
           }}
         />
+
         <Box>
           <Typography
             className="title_header"
@@ -148,10 +153,11 @@ export default function PrimarySearchAppBar(props) {
           </Typography>
         </Box>
       </Box>
+        {/* Search Input */}
       <Box
         sx={{
-          width: "50%",
-          py: "50px",
+          width: {xs: "100%", sm: "100%"},
+          py: "20px",
           display: "flex",
           alignSelf: "end",
           justifyContent: "end",
@@ -184,7 +190,7 @@ export default function PrimarySearchAppBar(props) {
             </IconButton>
           </Box>
         )}
-      </Box>
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -323,6 +329,8 @@ export default function PrimarySearchAppBar(props) {
           <Button onClick={submitForm}>Submit</Button>
         </DialogActions>
       </Dialog>
+      </Box>
+
     </Box>
   );
 }

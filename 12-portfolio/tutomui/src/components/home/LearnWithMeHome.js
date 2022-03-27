@@ -5,30 +5,33 @@ import { ReactComponent as CarreSecondary } from "../../assets/images/CarreSecon
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Masonry from "@mui/lab/Masonry";
 
 // import "../../assets/css/svg.css";
 import { Button, Typography } from "@mui/material";
 
-const HeaderHome = (props) => {
+export default function HeaderHome(props) {
   return (
     <Box
       sx={{
         textAlign: "center",
         minHeight: "80vh",
-        width: "100%",
+        maxWidth: "100vw",
         justifyContent: "center",
+        flexDirection: "row",
+        flexWrap: "wrap",
         display: "flex",
+        p: 2,
+        py: 5
       }}
     >
       <Box
         sx={{
-          maxWidth: "40%",
           textAlign: "left",
           display: "flex",
           flexDirection: "column",
           alignSelf: "center",
-          p: "50px",
+          maxWidth: { xs: "100vw", sm: "45%" },
+          p: {xs: 0, md: 5}
         }}
       >
         <Typography
@@ -41,7 +44,7 @@ const HeaderHome = (props) => {
             fontSize: "38px",
           }}
         >
-          Apprenez avec moi
+          Apprenons ensemble !
         </Typography>
         <Typography
           className="title_header"
@@ -61,9 +64,22 @@ const HeaderHome = (props) => {
         </Button>
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: { xs: "column", sm: "row" },
+        }}
+      >
         <Box sx={{ textAlign: "left", width: "100%", alignItems: "center" }}>
-          <Card sx={{ maxWidth: 275, m: "15px", pb: "35px" }}>
+          <Card
+            sx={{
+              width: { xs: "100%", sm: 275 },
+              pb: "35px",
+              m: { xs: 0, sm: 2 },
+              my: { xs: 2 },
+            }}
+          >
             <CardContent>
               <Carre className="unicorn" />
               <Typography
@@ -84,10 +100,11 @@ const HeaderHome = (props) => {
           </Card>
           <Card
             sx={{
-              maxWidth: 275,
-              m: "15px",
+              width: { xs: "100%", sm: 275 },
               backgroundColor: "#3A3149",
               pb: "35px",
+              m: { xs: 0, sm: 2 },
+              my: { xs: 2 },
             }}
           >
             <CardContent>
@@ -106,13 +123,14 @@ const HeaderHome = (props) => {
             </CardContent>
           </Card>
         </Box>
-        <Box sx={{ textAlign: "left", width: "100%", alignSelf: "center" }}>
+        <Box sx={{ textAlign: "left", alignSelf: "center", m: 0 }}>
           <Card
             sx={{
-              maxWidth: 275,
-              m: "15px",
-              backgroundColor: "#3A3149",
+              width: { xs: "100%", sm: 275 },
+              backgroundColor: { sm: "#3A3149", md: "#3A3149" },
               pb: "35px",
+              m: { xs: 0, sm: 2 },
+              my: { xs: 0 },
             }}
           >
             <CardContent>
@@ -134,6 +152,4 @@ const HeaderHome = (props) => {
       </Box>
     </Box>
   );
-};
-
-export default HeaderHome;
+}
