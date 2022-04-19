@@ -9,7 +9,7 @@ How install npx ?
   - https://www.npmjs.com/package/npx
 
 How install create-react-app ?
-  - ``` npm uninstall -g create-react-app ```
+  - ``` npm i -g create-react-app ```
 
 
 # Create App React JS
