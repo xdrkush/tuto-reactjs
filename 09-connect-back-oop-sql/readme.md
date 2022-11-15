@@ -1,6 +1,6 @@
-# 08-connect-back-oop-mongo
+# 09-connect-back-oop-sql
 
-(différence entre 07 - 08 l'architecture est favoriser pour la POO (Programmation Orienté Objet) ici)
+(différence entre 07 - 08 - 09 l'architecture est favoriser pour la POO (Programmation Orienté Objet) et la base de données est en SQL)
 
 # Quel utilité d'avoir un Back ?
 
@@ -27,15 +27,25 @@ models/ -> tous les models intérargissant avec la BDD
 cd tuto; npm i; npm start;
 ```
 
-# Pour le Back
+Si vous n'avez pas monter votre BDD suivez ces commandes sinon passer directement au démarage du Back.
+au cas ou, vous devez bien évidemment avoir un user mysql avec sont password.
 
-Démarrer MongoDB
+```sh
+cd backoop-sql
+sudo mysql
 ```
-sudo mongod
+
+dans le terminal mysql sourcer le script
+
+```sh
+source script.sql
 ```
+
+# Pour le Back
 
 ```
 cd back; npm i; npm run dev;
 ```
+
 
 Enjoy'
