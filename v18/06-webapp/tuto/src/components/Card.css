@@ -1,0 +1,12 @@
+.Card {
+    border: 1px solid #002647;
+    border-radius: 15px;
+    margin: 15px 0;
+    padding: 5px;
+}
+
+@media screen and (max-width: 520px) {
+    .Card {
+        min-width: 100%;
+    }
+}

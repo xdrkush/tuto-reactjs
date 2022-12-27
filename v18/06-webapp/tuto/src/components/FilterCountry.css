@@ -1,0 +1,31 @@
+.FilterCountry .bar {
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 15px;
+    background-color: #002647;
+    color: white;
+    box-shadow: 0 2px 2px rgba(51, 51, 51, 0.3);
+}
+
+.FilterCountry .bar div ul input[type="radio"] {
+    transform: translate(-5px, 1px);
+}
+
+.FilterCountry .bar div .cancel h5 {
+    text-align: center;
+    width: 180px;
+    margin: 0 auto;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    color:red
+}
+
+.FilterCountry .bar div .cancel h5:hover {
+    padding: 10px;
+    background: #0076A8;
+    border-color: #0076A8;
+}
+
+
+.bg-white { background-color: #fff; }

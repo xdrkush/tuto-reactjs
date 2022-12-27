@@ -1,0 +1,16 @@
+.Navbar {
+    padding: 0 20px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.item-nav {
+    margin: 0 20px;
+}
+
+.Navbar > h2,a {
+    color: var(--ligth-color);
+}

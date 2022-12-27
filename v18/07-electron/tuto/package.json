@@ -1,0 +1,94 @@
+{
+  "name": "tuto",
+  "displayName": "TutoReactv18",
+  "version": "0.1.0",
+  "author": {
+    "name": "hsuk",
+    "email": "hs@uk.com",
+    "url": "https://404notfound.com"
+  },
+  "description": "Ma super app",
+  "email": "drkush@gmail.com",
+  "license": "MIT",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "private": true,
+  "build": {
+    "appId": "tuto.react.com",
+    "productName": "My Kusholio Electron React App",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "public",
+      "output": "dist/electron"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.0",
+    "electron-is-dev": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.4",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "w:build": "cross-env BUILD_PATH='./dist/webapp' react-scripts build",
+    "e:dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "electron-build": "electron-builder -wl",
+    "release": "npm react-build && electron-builder --publish=always",
+    "e:build": "npm run build && npm run electron-build",
+    "e:mac": "yarn e:build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "e:win": "yarn e:build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "e:linux": "yarn e:build && electron-builder -l -c.extraMetadata.main=build/electron.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
+    "electronmon": "^2.0.2",
+    "redux-devtools": "^3.7.0",
+    "redux-thunk": "^2.4.2",
+    "wait-on": "^6.0.1"
+  }
+}

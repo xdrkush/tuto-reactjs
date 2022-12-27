@@ -1,0 +1,109 @@
+:root {
+  --primary-color: #002647;
+  --secondary-color: #0076A8;
+  --ligth-color: #ffffff;
+  --dark-color: #04111d
+}
+
+main {
+  /* 50 px = la height de la navbar et du footer */
+  min-height: calc(100vh - (50px + 50px));
+}
+
+li { list-style: none }
+a { text-decoration: none; }
+a:link { text-decoration: none; }
+h2 {  margin: 0 }
+
+h1, h2, h3, h4, h5, h5, p, a {
+  margin: 0;
+  padding: 0;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: var(--primary-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+/* Width */
+.w-25 {
+  width: 25%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-75 {
+  width: 75%;
+}
+.w-100 {
+  width: 100%;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.items-center {
+  align-items: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@media screen and (max-width: 520px) {
+  .container {
+    width: 95%;
+  }
+}
